@@ -1,5 +1,7 @@
 package com.facilita.appAluguel.models;
 
+import com.facilita.appAluguel.dto.EnderecoDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,5 +39,15 @@ public class Endereco {
     @Column(name = "cep", length = 10)
     private String cep;
 
-    
+    public EnderecoDTO toDTO() {
+        return new EnderecoDTO(
+            this.logradouro,
+            this.numero,
+            this.complemento,
+            this.bairro,
+            this.cidade,
+            this.estado,
+            this.cep
+        );
+    }
 }
