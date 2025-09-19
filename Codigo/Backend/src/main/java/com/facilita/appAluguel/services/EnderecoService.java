@@ -12,9 +12,10 @@ public class EnderecoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    public void criarEndereco(String body) {
+    public Endereco criarEndereco(String body) {
         Endereco endereco = new Endereco();
         enderecoRepository.save(endereco);
+        return endereco;
     }
 
     public String buscarEnderecoPorId(Long id) {

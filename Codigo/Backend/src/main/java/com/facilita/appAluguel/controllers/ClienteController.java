@@ -21,53 +21,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-    
+
     @Autowired
     private ClienteService clienteService;
 
-@PostMapping("/cadastrar")
-public ResponseEntity<?> cadastrarCliente(@RequestBody ClienteCreateDTO clienteCreateDTO) {
-    try {
-        Cliente cliente = clienteCreateDTO.toEntity(Cliente.class);
+    @PostMapping("/cadastrar")
+    public ResponseEntity<?> cadastrarCliente(@RequestBody ClienteCreateDTO clienteCreateDTO) {
+        try {
+            // Converte o DTO para a entidade Cliente. O endereço já deve vir preenchido no DTO.
+            Cliente cliente = clienteCreateDTO.toEntity(Cliente.class);
 
-        if (clienteService.existsByEmail(cliente.getEmail())) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("Erro: Email já cadastrado.");
+            // Delega a lógica de validação e persistência para o serviço.
+            Cliente novoCliente = clienteService.cadastrarCliente(cliente);
+
+            // Retorna o DTO do cliente recém-criado.
+            return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente.toDTO());
+
+        } catch (IllegalArgumentException e) {
+            // Captura exceções de validação específicas do serviço
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch (Exception e) {
+            // Captura exceções genéricas
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao cadastrar cliente: " + e.getMessage());
         }
-
-        if (clienteService.existsByCpf(cliente.getCpf())) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("Erro: CPF já cadastrado.");
-        }
-
-        if (clienteService.existsByRg(cliente.getRg())) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("Erro: RG já cadastrado.");
-        }
-
-        Cliente novoCliente = clienteService.cadastrarCliente(cliente);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(novoCliente.toDTO());
-
-    } catch (Exception e) {
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Erro ao cadastrar cliente: " + e.getMessage());
     }
-}
-
 
     @PostMapping("/login")
     public ResponseEntity<String> loginCliente(@RequestBody LoginDTO loginDTO) {
         String token = clienteService.login(loginDTO);
         return ResponseEntity.ok(token);
     }
-    
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllClientes() {
+        try {
+            return ResponseEntity.ok(clienteService.getAllClientes());
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao buscar clientes: " + e.getMessage());
+        }
+    }
 
     @PutMapping("/atualizar/{id}")
     public String atualizarCliente(@PathVariable Long id, @RequestBody ClienteUpdateDTO clienteUpdateDTO) {
@@ -96,6 +91,5 @@ public ResponseEntity<?> cadastrarCliente(@RequestBody ClienteCreateDTO clienteC
             return "Cliente não encontrado";
         }
     }
-    
-    
+
 }

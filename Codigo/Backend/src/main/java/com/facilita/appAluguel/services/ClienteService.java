@@ -3,6 +3,7 @@ package com.facilita.appAluguel.services;
 import com.facilita.appAluguel.dto.ClienteUpdateDTO;
 import com.facilita.appAluguel.dto.LoginDTO;
 import com.facilita.appAluguel.models.Cliente;
+import com.facilita.appAluguel.models.Endereco;
 import com.facilita.appAluguel.repositories.ClienteRepository;
 
 import jakarta.transaction.Transactional;
@@ -31,7 +32,16 @@ public class ClienteService {
 
     @Transactional
     public Cliente cadastrarCliente(Cliente cliente) {
-        cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
+        if (repository.existsByEmail(cliente.getEmail())) {
+            throw new IllegalArgumentException("Erro: Email já cadastrado.");
+        }
+        if (repository.existsByCpf(cliente.getCpf())) {
+            throw new IllegalArgumentException("Erro: CPF já cadastrado.");
+        }
+        if (repository.existsByRg(cliente.getRg())) {
+            throw new IllegalArgumentException("Erro: RG já cadastrado.");
+        }
+
         return repository.save(cliente);
     }
 
@@ -41,23 +51,57 @@ public class ClienteService {
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado com id: " + id));
 
         if (dto.email() != null) {
-            Optional<Cliente> clienteComMesmoEmail = repository.findByEmail(dto.email());
-            if (clienteComMesmoEmail.isPresent() && !clienteComMesmoEmail.get().getId().equals(id)) {
-                throw new IllegalArgumentException("Email já cadastrado por outro usuário!");
-            }
+            repository.findByEmail(dto.email())
+                    .ifPresent(c -> {
+                        if (!c.getId().equals(id)) {
+                            throw new IllegalArgumentException("Email já cadastrado por outro usuário!");
+                        }
+                    });
         }
 
-        if (dto.nome() != null)
+        if (dto.nome() != null) {
             clienteExistente.setNome(dto.nome());
-        if (dto.email() != null)
+        }
+        if (dto.email() != null) {
             clienteExistente.setEmail(dto.email());
+        }
         if (dto.senha() != null && !dto.senha().isEmpty()) {
             clienteExistente.setSenha(passwordEncoder.encode(dto.senha()));
         }
-        if (dto.profissao() != null)
+        if (dto.profissao() != null) {
             clienteExistente.setProfissao(dto.profissao());
-        if (dto.endereco() != null)
-            clienteExistente.setEndereco(dto.endereco());
+        }
+
+        if (dto.endereco() != null) {
+            Endereco enderecoDTO = dto.endereco();
+            Endereco enderecoExistente = clienteExistente.getEndereco();
+
+            if (enderecoExistente == null) {
+                clienteExistente.setEndereco(enderecoDTO);
+            } else {
+                if (enderecoDTO.getLogradouro() != null) {
+                    enderecoExistente.setLogradouro(enderecoDTO.getLogradouro());
+                }
+                if (enderecoDTO.getNumero() != null) {
+                    enderecoExistente.setNumero(enderecoDTO.getNumero());
+                }
+                if (enderecoDTO.getBairro() != null) {
+                    enderecoExistente.setBairro(enderecoDTO.getBairro());
+                }
+                if (enderecoDTO.getCep() != null) {
+                    enderecoExistente.setCep(enderecoDTO.getCep());
+                }
+                if (enderecoDTO.getCidade() != null) {
+                    enderecoExistente.setCidade(enderecoDTO.getCidade());
+                }
+                if (enderecoDTO.getEstado() != null) {
+                    enderecoExistente.setEstado(enderecoDTO.getEstado());
+                }
+                if (enderecoDTO.getComplemento() != null) {
+                    enderecoExistente.setComplemento(enderecoDTO.getComplemento());
+                }
+            }
+        }
 
         return repository.save(clienteExistente);
     }
@@ -67,9 +111,14 @@ public class ClienteService {
         return repository.findById(id).orElse(null);
     }
 
+    public Iterable<Cliente> getAllClientes() {
+        return repository.findAll();
+    }
+
     @Transactional
     public void deletarCliente(Long id) {
         repository.deleteById(id);
+
     }
 
     public String login(LoginDTO loginDTO) {
@@ -82,7 +131,7 @@ public class ClienteService {
         // throw new RuntimeException("Credenciais inválidas");
         // }
         if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(), cliente.get().getSenha())) {
-            return "Login successful"; 
+            return "Login successful";
         } else {
             throw new RuntimeException("Credenciais inválidas");
         }

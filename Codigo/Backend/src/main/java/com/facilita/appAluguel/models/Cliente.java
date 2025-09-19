@@ -3,6 +3,7 @@ package com.facilita.appAluguel.models;
 import com.facilita.appAluguel.dto.ClienteCreateDTO;
 import com.facilita.appAluguel.dto.ClienteDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -28,8 +29,8 @@ public class Cliente extends Usuario {
     private String cpf;
     @Column(name = "rg", length = 20, unique = true)
     private String rg;
-    @OneToOne
-    @JoinColumn(name = "endereco_id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 
     public ClienteDTO toDTO() {
