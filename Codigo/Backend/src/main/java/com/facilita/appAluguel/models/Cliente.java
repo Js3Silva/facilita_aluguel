@@ -1,5 +1,7 @@
 package com.facilita.appAluguel.models;
 
+import java.util.List;
+
 import com.facilita.appAluguel.dto.ClienteCreateDTO;
 import com.facilita.appAluguel.dto.ClienteDTO;
 
@@ -7,6 +9,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -33,15 +36,27 @@ public class Cliente extends Usuario {
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "rendimento_id", referencedColumnName = "id")
+    private List<Rendimento> rendimentos;
+
     public ClienteDTO toDTO() {
         return new ClienteDTO(
-            id, nome, profissao, cpf, rg, endereco 
+            id, nome, profissao, cpf, rg, endereco, rendimentos.stream().map(Rendimento::toDTO).toList()
         );
     }
 
     public ClienteCreateDTO toCreateDTO() {
         return new ClienteCreateDTO(
-            nome, email, senha, profissao, cpf, rg, endereco
+            nome, email, senha, profissao, cpf, rg, endereco, rendimentos
         );
+    }
+
+    private void addRendimento(Rendimento rendimento) {
+        this.rendimentos.add(rendimento);
+    }
+
+    private void removeRendimento(Rendimento rendimento) {
+        this.rendimentos.remove(rendimento);
     }
 }

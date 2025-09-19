@@ -28,20 +28,13 @@ public class ClienteController {
     @PostMapping("/cadastrar")
     public ResponseEntity<?> cadastrarCliente(@RequestBody ClienteCreateDTO clienteCreateDTO) {
         try {
-            // Converte o DTO para a entidade Cliente. O endereço já deve vir preenchido no DTO.
             Cliente cliente = clienteCreateDTO.toEntity(Cliente.class);
-
-            // Delega a lógica de validação e persistência para o serviço.
             Cliente novoCliente = clienteService.cadastrarCliente(cliente);
-
-            // Retorna o DTO do cliente recém-criado.
             return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente.toDTO());
 
         } catch (IllegalArgumentException e) {
-            // Captura exceções de validação específicas do serviço
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         } catch (Exception e) {
-            // Captura exceções genéricas
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Erro ao cadastrar cliente: " + e.getMessage());
         }

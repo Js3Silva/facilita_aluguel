@@ -59,6 +59,16 @@ public class ClienteService {
                     });
         }
 
+        if (dto.cpf() != null) {
+            repository.findByCpf(dto.cpf())
+                    .ifPresent(c -> {
+                        if (!c.getId().equals(id)) {
+                            throw new IllegalArgumentException("CPF já cadastrado por outro usuário!");
+                        }
+                    });
+            clienteExistente.setCpf(dto.cpf());
+        }
+
         if (dto.nome() != null) {
             clienteExistente.setNome(dto.nome());
         }
