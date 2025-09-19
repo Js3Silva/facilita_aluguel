@@ -1,11 +1,11 @@
 package com.facilita.appAluguel.services;
 
+import com.facilita.appAluguel.dto.ClienteUpdateDTO;
 import com.facilita.appAluguel.dto.LoginDTO;
 import com.facilita.appAluguel.models.Cliente;
 import com.facilita.appAluguel.repositories.ClienteRepository;
 
 import jakarta.transaction.Transactional;
-import lombok.extern.java.Log;
 
 import java.util.Optional;
 
@@ -36,19 +36,28 @@ public class ClienteService {
     }
 
     @Transactional
-    public Cliente atualizarCliente(Long id, Cliente cliente) {
+    public Cliente atualizarCliente(long id, ClienteUpdateDTO dto) {
         Cliente clienteExistente = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado com id: " + id));
 
-        clienteExistente.setNome(cliente.getNome());
-        clienteExistente.setEmail(cliente.getEmail());
-        if (cliente.getSenha() != null && !cliente.getSenha().isEmpty()) {
-            clienteExistente.setSenha(passwordEncoder.encode(cliente.getSenha()));
+        if (dto.email() != null) {
+            Optional<Cliente> clienteComMesmoEmail = repository.findByEmail(dto.email());
+            if (clienteComMesmoEmail.isPresent() && !clienteComMesmoEmail.get().getId().equals(id)) {
+                throw new IllegalArgumentException("Email já cadastrado por outro usuário!");
+            }
         }
-        clienteExistente.setProfissao(cliente.getProfissao());
-        clienteExistente.setCpf(cliente.getCpf());
-        clienteExistente.setRg(cliente.getRg());
-        clienteExistente.setEndereco(cliente.getEndereco());
+
+        if (dto.nome() != null)
+            clienteExistente.setNome(dto.nome());
+        if (dto.email() != null)
+            clienteExistente.setEmail(dto.email());
+        if (dto.senha() != null && !dto.senha().isEmpty()) {
+            clienteExistente.setSenha(passwordEncoder.encode(dto.senha()));
+        }
+        if (dto.profissao() != null)
+            clienteExistente.setProfissao(dto.profissao());
+        if (dto.endereco() != null)
+            clienteExistente.setEndereco(dto.endereco());
 
         return repository.save(clienteExistente);
     }
@@ -65,17 +74,30 @@ public class ClienteService {
 
     public String login(LoginDTO loginDTO) {
         Optional<Cliente> cliente = repository.findByEmail(loginDTO.email());
-    //     if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(), cliente.get().getSenha())) {
-    //         // String token = jwtService.generateToken(cliente.get());
-    //         // return token;
-    //     } else {
-    //         throw new RuntimeException("Credenciais inválidas");
-    //     }
+        // if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(),
+        // cliente.get().getSenha())) {
+        // // String token = jwtService.generateToken(cliente.get());
+        // // return token;
+        // } else {
+        // throw new RuntimeException("Credenciais inválidas");
+        // }
         if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(), cliente.get().getSenha())) {
-            return "Login successful"; // Placeholder for actual token
+            return "Login successful"; 
         } else {
             throw new RuntimeException("Credenciais inválidas");
         }
+    }
+
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
+    }
+
+    public boolean existsByCpf(String cpf) {
+        return repository.existsByCpf(cpf);
+    }
+
+    public boolean existsByRg(String rg) {
+        return repository.existsByRg(rg);
     }
 
 }

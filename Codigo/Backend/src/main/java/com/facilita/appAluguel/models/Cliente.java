@@ -1,5 +1,6 @@
 package com.facilita.appAluguel.models;
 
+import com.facilita.appAluguel.dto.ClienteCreateDTO;
 import com.facilita.appAluguel.dto.ClienteDTO;
 
 import jakarta.persistence.Column;
@@ -33,7 +34,13 @@ public class Cliente extends Usuario {
 
     public ClienteDTO toDTO() {
         return new ClienteDTO(
-            id, nome, email, senha, profissao, cpf, rg, endereco 
+            id, nome, profissao, cpf, rg, endereco 
+        );
+    }
+
+    public ClienteCreateDTO toCreateDTO() {
+        return new ClienteCreateDTO(
+            nome, email, senha, profissao, cpf, rg, endereco
         );
     }
 }

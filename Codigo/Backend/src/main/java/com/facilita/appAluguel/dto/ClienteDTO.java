@@ -7,8 +7,6 @@ import com.facilita.appAluguel.models.IMappable;
 public record ClienteDTO(
     Long id, 
     String nome,
-    String email,
-    String senha,
     String profissao,
     String cpf,
     String rg,

@@ -1,6 +1,7 @@
 package com.facilita.appAluguel.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,13 +25,42 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping("/cadastrar")
-    public String cadastrarCliente(@RequestBody ClienteCreateDTO clienteCreateDTO) {
+@PostMapping("/cadastrar")
+public ResponseEntity<?> cadastrarCliente(@RequestBody ClienteCreateDTO clienteCreateDTO) {
+    try {
         Cliente cliente = clienteCreateDTO.toEntity(Cliente.class);
+
+        if (clienteService.existsByEmail(cliente.getEmail())) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Erro: Email já cadastrado.");
+        }
+
+        if (clienteService.existsByCpf(cliente.getCpf())) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Erro: CPF já cadastrado.");
+        }
+
+        if (clienteService.existsByRg(cliente.getRg())) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Erro: RG já cadastrado.");
+        }
+
         Cliente novoCliente = clienteService.cadastrarCliente(cliente);
-        
-        return novoCliente.toDTO().toString();
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(novoCliente.toDTO());
+
+    } catch (Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Erro ao cadastrar cliente: " + e.getMessage());
     }
+}
+
 
     @PostMapping("/login")
     public ResponseEntity<String> loginCliente(@RequestBody LoginDTO loginDTO) {
@@ -41,8 +71,7 @@ public class ClienteController {
 
     @PutMapping("/atualizar/{id}")
     public String atualizarCliente(@PathVariable Long id, @RequestBody ClienteUpdateDTO clienteUpdateDTO) {
-        Cliente cliente = clienteUpdateDTO.toEntity(Cliente.class);
-        Cliente clienteAtualizado = clienteService.atualizarCliente(id, cliente);
+        Cliente clienteAtualizado = clienteService.atualizarCliente(id, clienteUpdateDTO);
 
         if (clienteAtualizado == null) {
             return "Cliente nao encontrado";

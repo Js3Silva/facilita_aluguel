@@ -9,8 +9,7 @@ public record ClienteUpdateDTO(
     String nome,
     String email,
     String profissao,
-    String cpf,
-    String rg,
+    String senha,
     Endereco endereco
 ) implements IMappable<Cliente> {
 }
