@@ -1,17 +1,24 @@
 package com.facilita.appAluguel.services;
 
+import com.facilita.appAluguel.dto.LoginDTO;
 import com.facilita.appAluguel.models.Cliente;
 import com.facilita.appAluguel.repositories.ClienteRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.java.Log;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+// import com.facilita.appAluguel.security.JwtService;
 
 @Service
 public class ClienteService {
 
+    // @Autowired
+    // private JwtService jwtService;
     @Autowired
     private final ClienteRepository repository;
     @Autowired
@@ -27,7 +34,6 @@ public class ClienteService {
         cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
         return repository.save(cliente);
     }
-
 
     @Transactional
     public Cliente atualizarCliente(Long id, Cliente cliente) {
@@ -55,6 +61,21 @@ public class ClienteService {
     @Transactional
     public void deletarCliente(Long id) {
         repository.deleteById(id);
+    }
+
+    public String login(LoginDTO loginDTO) {
+        Optional<Cliente> cliente = repository.findByEmail(loginDTO.email());
+    //     if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(), cliente.get().getSenha())) {
+    //         // String token = jwtService.generateToken(cliente.get());
+    //         // return token;
+    //     } else {
+    //         throw new RuntimeException("Credenciais inválidas");
+    //     }
+        if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(), cliente.get().getSenha())) {
+            return "Login successful"; // Placeholder for actual token
+        } else {
+            throw new RuntimeException("Credenciais inválidas");
+        }
     }
 
 }

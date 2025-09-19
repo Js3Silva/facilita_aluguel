@@ -17,4 +17,13 @@ public class EnderecoService {
         enderecoRepository.save(endereco);
     }
 
+    public String buscarEnderecoPorId(Long id) {
+        Endereco endereco = enderecoRepository.findById(id).orElse(null);
+        if (endereco != null) {
+            return endereco.toString();
+        } else {
+            return "Endereço não encontrado.";
+        }
+    }
+
 }

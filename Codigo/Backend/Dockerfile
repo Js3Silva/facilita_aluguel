@@ -13,7 +13,7 @@ FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/target/app.jar app.jar
+COPY --from=build /app/target/appAluguel-0.0.1-SNAPSHOT.jar app.jar
 
 ENV TZ=America/Sao_Paulo
 ENV SPRING_PROFILES_ACTIVE=dev

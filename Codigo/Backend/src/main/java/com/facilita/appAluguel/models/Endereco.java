@@ -41,6 +41,7 @@ public class Endereco {
 
     public EnderecoDTO toDTO() {
         return new EnderecoDTO(
+            this.id,
             this.logradouro,
             this.numero,
             this.complemento,

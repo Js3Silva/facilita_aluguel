@@ -1,11 +1,13 @@
 package com.facilita.appAluguel.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.facilita.appAluguel.dto.ClienteCreateDTO;
 import com.facilita.appAluguel.dto.ClienteUpdateDTO;
+import com.facilita.appAluguel.dto.LoginDTO;
 import com.facilita.appAluguel.models.Cliente;
 import com.facilita.appAluguel.services.ClienteService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,13 @@ public class ClienteController {
         
         return novoCliente.toDTO().toString();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginCliente(@RequestBody LoginDTO loginDTO) {
+        String token = clienteService.login(loginDTO);
+        return ResponseEntity.ok(token);
+    }
+    
 
     @PutMapping("/atualizar/{id}")
     public String atualizarCliente(@PathVariable Long id, @RequestBody ClienteUpdateDTO clienteUpdateDTO) {
