@@ -15,3 +15,28 @@ var displayNone = 'disp_none'
     modalRegister.classList.add(displayNone)
     modalLogin.classList.remove(displayNone)
  })
+
+
+ id="check-cliente"
+
+const checkCliente = document.querySelector('#check-cliente')
+const labelCliente = document.querySelector('#label-cliente')
+const checkAgente = document.querySelector('#check-agente')
+const labelAgente = document.querySelector('#label-agente')
+
+
+
+
+labelCliente.addEventListener('click', () => {
+    checkCliente.checked = true;
+    checkAgente.checked = false; 
+    labelCliente.classList.add('bg-red')
+    labelAgente.classList.remove('bg-red')
+})
+
+labelAgente.addEventListener('click', () => {
+    checkAgente.checked = true;
+    checkCliente.checked = false; 
+    labelAgente.classList.add('bg-red')
+    labelCliente.classList.remove('bg-red')
+})
