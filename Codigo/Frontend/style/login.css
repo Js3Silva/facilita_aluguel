@@ -114,15 +114,18 @@ h1{
 }
 
 
+
 .register-container{
     background-color: white;
     box-shadow: 0px 0px 4px rgb(167, 167, 167);
     border-radius: 20px;
-    width: 70vh;
-    height: 40vh;
+    width: 90vh;
+    height: 60vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+
 
 .has-login{
     background-color: rgb(128, 0, 0);
@@ -172,7 +175,7 @@ h1{
 
 .register-inputs .input-box{
     width: 80%;
-    height: 10%;
+    height: 7%;
     margin: 5px;
     border: 2px solid  rgb(128, 0, 0);
     border-radius: 10px;
@@ -208,7 +211,7 @@ h1{
 
 .register-inputs .input-user{
     width: 80%;
-    height: 10%;
+    height: 7%;
     margin: 5px;
     display: flex;
     flex-direction: row;
@@ -234,6 +237,7 @@ h1{
     border-radius: 9px 0px 0px 9px;
     height: 100%;
     width: 100%;
+    border-right: 1px solid black;
 }
 
 #label-agente{
