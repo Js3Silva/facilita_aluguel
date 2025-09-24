@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilita Aluguel</title>
+    <link rel="stylesheet" href="../style/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="../assets/logo.png" alt="Logo" class="me-2" style="height:40px;">
+                Facilita Aluguel
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav me-3">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Categorias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+                </ul>
+                <a href="#" class="btn btn-outline-light">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero d-flex align-items-center text-white" style="height:60vh; background:#0d1b2a;">
+        <div class="container text-center">
+            <h1 class="mb-3">Alugue seu carro dos sonhos</h1>
+            <p class="mb-4">Lorem Ipsum has been the industry's standard dummy text ever since</p>
+            <a href="#" class="btn btn-outline-light">Saiba Mais</a>
+        </div>
+        <img src="../assets/suv.png" alt="Carro" class="hero-car position-absolute end-0 bottom-0"
+            style="max-height:250px;">
+    </header>
+
+    <!-- Categorias -->
+    <section class="py-5 text-center">
+        <div class="container">
+            <div class="d-flex justify-content-center gap-4 flex-wrap">
+                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
+                    <p>Sedan</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-car-front-fill fs-2"></i>
+                    <p>Cabriolet</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
+                    <p>Coupe</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-truck-front fs-2"></i>
+                    <p>SUV</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
+                    <p>Micro</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Categories -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Top Categories</h2>
+
+            <!-- Nav Tabs -->
+            <ul class="nav nav-tabs justify-content-center mb-4" id="categoryTabs">
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#disp">Disponível</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pref">Preferidos</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#econ">Econômicos</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#luxo">Luxo</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="card">
+                        <img src="img/ferrari1.jpg" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5>Ferrari</h5>
+                            <p class="text-muted">Lorem Ipsum</p>
+                            <p class="fw-bold">$78,000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Outras abas -->
+        <div class="tab-pane fade" id="pref">
+            <p class="text-center">Carros preferidos em breve...</p>
+        </div>
+        <div class="tab-pane fade" id="econ">
+            <p class="text-center">Carros econômicos em breve...</p>
+        </div>
+        <div class="tab-pane fade" id="luxo">
+            <p class="text-center">Carros de luxo em breve...</p>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4 text-white bg-dark">
+        <div class="container d-flex justify-content-between flex-wrap align-items-center">
+            <div class="d-flex align-items-center gap-3">
+                <img src="../assets/logo.png" alt="Logo" class="logo-footer" style="height:40px;">
+                <a href="#" class="text-white text-decoration-none">Home</a>
+                <a href="#" class="text-white text-decoration-none">Sobre</a>
+            </div>
+            <div>
+                <p class="mb-1">(31)99999-9999 <i class="bi bi-whatsapp"></i></p>
+                <p class="mb-1">info@facitaaluguel.com</p>
+                <p class="mb-0">Rua Facilita, Belo Horizonte - MG</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/home.js"></script>
+</body>
+
+</html>
