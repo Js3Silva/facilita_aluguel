@@ -33,6 +33,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 105%;
 }
 
 h1{
@@ -253,4 +254,10 @@ h1{
 .bg-red{
     background-color: red;
     color: white;
+}
+
+.forgot-password{
+    padding-top: 10px;
+    font-size: 15px;
+    color:black;
 }
