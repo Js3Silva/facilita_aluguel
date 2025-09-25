@@ -1,15 +1,13 @@
 package com.facilita.appAluguel.models;
 
-import com.facilita.appAluguel.dto.ClienteCreateDTO;
-import com.facilita.appAluguel.dto.ClienteDTO;
+import com.facilita.appAluguel.dto.AgenteCreateDTO;
+import com.facilita.appAluguel.dto.AgenteDTO;
 import com.facilita.appAluguel.enums.PerfilUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Table(name = "agentes")
@@ -23,20 +21,18 @@ public class Agente extends Usuario {
     private PerfilUsuario perfilUsuario;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     private Empresa empresa;
 
-//    public ClienteDTO toDTO() {
-//        return new ClienteDTO(
-//            id, nome, profissao, cpf, rg, endereco, rendimentos.stream().map(Rendimento::toDTO).toList()
-//        );
-//    }
-//
-//    public ClienteCreateDTO toCreateDTO() {
-//        return new ClienteCreateDTO(
-//            nome, email, senha, profissao, cpf, rg, endereco, rendimentos
-//        );
-//    }
+    public AgenteDTO toDTO() {
+        return new AgenteDTO(
+            id, nome, perfilUsuario, empresa
+        );
+    }
 
-
+    public AgenteCreateDTO toCreateDTO() {
+        return new AgenteCreateDTO(
+            nome, email, senha, perfilUsuario, empresa
+        );
+    }
 }

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Codigo/Backend/appAluguel.iml" filepath="$PROJECT_DIR$/Codigo/Backend/appAluguel.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/facilita_aluguel.iml" filepath="$PROJECT_DIR$/.idea/facilita_aluguel.iml" />
     </modules>
   </component>
