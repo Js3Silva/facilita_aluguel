@@ -26,7 +26,7 @@ body {
   position: relative;
   background: #0d1b2a;
   color: #fff;
-  padding-top: 80px; /* espaçamento abaixo da navbar fixa */
+  padding-top: 80px; 
 }
 
 .hero h1 {
