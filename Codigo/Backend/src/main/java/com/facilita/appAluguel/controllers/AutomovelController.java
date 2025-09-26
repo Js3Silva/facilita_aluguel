@@ -1,6 +1,7 @@
 package com.facilita.appAluguel.controllers;
 
 import com.facilita.appAluguel.dto.AutomovelCreateDTO;
+import com.facilita.appAluguel.dto.AutomovelDTO;
 import com.facilita.appAluguel.dto.AutomovelUpdateDTO;
 import com.facilita.appAluguel.models.Automovel;
 import com.facilita.appAluguel.services.AutomovelService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/automoveis")
+@CrossOrigin(origins = "*")
 public class AutomovelController {
 
     @Autowired
@@ -21,6 +23,7 @@ public class AutomovelController {
 
     /**
      * Cadastra um novo automóvel.
+     * 
      * @param automovelCreateDTO DTO com os dados do automóvel.
      * @return ResponseEntity com o automóvel cadastrado ou mensagem de erro.
      */
@@ -40,6 +43,7 @@ public class AutomovelController {
 
     /**
      * Lista todos os automóveis cadastrados.
+     * 
      * @return ResponseEntity com a lista de automóveis ou mensagem de erro.
      */
     @GetMapping("/all")
@@ -54,7 +58,8 @@ public class AutomovelController {
 
     /**
      * Atualiza um automóvel existente.
-     * @param id ID do automóvel a ser atualizado.
+     * 
+     * @param id                 ID do automóvel a ser atualizado.
      * @param automovelUpdateDTO DTO com os dados de atualização.
      * @return String com o DTO do automóvel atualizado ou mensagem de erro.
      */
@@ -69,17 +74,24 @@ public class AutomovelController {
 
     /**
      * Busca um automóvel pelo ID.
+     * 
      * @param id ID do automóvel.
      * @return String com o DTO do automóvel ou mensagem de erro.
      */
     @GetMapping("/{id}")
-    public String getAutomovelById(@PathVariable Long id) {
+    public ResponseEntity<AutomovelDTO> getAutomovelById(@PathVariable Long id) {
         Automovel automovel = automovelService.getAutomovelById(id);
-        return automovel != null ? automovel.toDTO().toString() : "Automóvel não encontrado";
+
+        if (automovel != null) {
+            return ResponseEntity.ok(automovel.toDTO()); 
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
      * Deleta um automóvel pelo ID.
+     * 
      * @param id ID do automóvel a ser deletado.
      * @return String com mensagem de sucesso ou erro.
      */
@@ -96,6 +108,7 @@ public class AutomovelController {
 
     /**
      * Reserva um automóvel.
+     * 
      * @param id ID do automóvel a ser reservado.
      * @return ResponseEntity com mensagem de sucesso ou erro.
      */
@@ -116,6 +129,7 @@ public class AutomovelController {
 
     /**
      * Libera um automóvel reservado.
+     * 
      * @param id ID do automóvel a ser liberado.
      * @return ResponseEntity com mensagem de sucesso ou erro.
      */
