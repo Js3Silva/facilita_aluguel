@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("carros-container");
   const modal = new bootstrap.Modal(document.getElementById("modalAluguel"));
 
-  let carroSelecionado = null; 
+  let carroSelecionado = null;
 
-  fetch("http://localhost:8080/automoveis/all") 
+  fetch("http://localhost:8080/automoveis/all")
     .then(res => res.json())
     .then(carros => {
       container.innerHTML = "";
@@ -49,13 +49,29 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnConfirmar").addEventListener("click", () => {
     if (!carroSelecionado) return;
 
-    fetch("/api/pedidos", {
+    const dataInicioInput = document.getElementById("dataInicio");
+    const dataFimInput = document.getElementById("dataRetorno");
+
+    const dataInicio = dataInicioInput.value;
+    const dataFim = dataFimInput.value;
+
+    if (!dataInicio || !dataFim) {
+      alert("Por favor, selecione ambas as datas.");
+      return;
+    }
+
+    fetch("http://localhost:8080/pedidos/cadastrar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ carroId: carroSelecionado.id })
+      body: JSON.stringify({
+        clienteId: 1,
+        automovelId: carroSelecionado.id,
+        dataInicio,
+        dataFim
+      })
     })
       .then(res => res.json())
-      .then(resp => {
+      .then(() => {
         alert("Pedido confirmado com sucesso!");
         modal.hide();
       })
@@ -63,61 +79,61 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    if (!localStorage.getItem("automoveis_inicializados")) {
-      
-      const automoveisMock = [
-        {
-          matricula: 10,
-          ano: 2025,
-          marca: "Toyota",
-          placa: "ABC1234",
-          modelo: "Corolla",
-          situacao: "DISPONIVEL"
-        },
-        {
-          matricula: 2,
-          ano: 2019,
-          marca: "Honda",
-          placa: "XYZ5678",
-          modelo: "Civic",
-          situacao: "DISPONIVEL"
-        },
-        {
-          matricula: 3,
-          ano: 2021,
-          marca: "Ford",
-          placa: "DEF5678",
-          modelo: "Mustang",
-          situacao: "DISPONIVEL"
-        },
-        {
-          matricula: 4,
-          ano: 2019,
-          marca: "Volkswagen",
-          placa: "XYZ5228",
-          modelo: "Gol",
-          situacao: "DISPONIVEL"
-        }
-      ];
+document.addEventListener("DOMContentLoaded", () => {
+  if (!localStorage.getItem("automoveis_inicializados")) {
 
-      // Faz a requisição POST para cada veículo
-      automoveisMock.forEach(auto => {
-        fetch("http://localhost:8080/automoveis/cadastrar", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(auto)
-        })
+    const automoveisMock = [
+      {
+        matricula: 10,
+        ano: 2025,
+        marca: "Toyota",
+        placa: "ABC1234",
+        modelo: "Corolla",
+        situacao: "DISPONIVEL"
+      },
+      {
+        matricula: 2,
+        ano: 2019,
+        marca: "Honda",
+        placa: "XYZ5678",
+        modelo: "Civic",
+        situacao: "DISPONIVEL"
+      },
+      {
+        matricula: 3,
+        ano: 2021,
+        marca: "Ford",
+        placa: "DEF5678",
+        modelo: "Mustang",
+        situacao: "DISPONIVEL"
+      },
+      {
+        matricula: 4,
+        ano: 2019,
+        marca: "Volkswagen",
+        placa: "XYZ5228",
+        modelo: "Gol",
+        situacao: "DISPONIVEL"
+      }
+    ];
+
+    // Faz a requisição POST para cada veículo
+    automoveisMock.forEach(auto => {
+      fetch("http://localhost:8080/automoveis/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(auto)
+      })
         .then(res => {
           if (!res.ok) throw new Error("Erro ao cadastrar veículo");
           return res.json();
         })
         .then(data => console.log("Criado:", data))
         .catch(err => console.error(err));
-      });
+    });
 
-      localStorage.setItem("automoveis_inicializados", "true");
-    }
-  });
+    localStorage.setItem("automoveis_inicializados", "true");
+  }
+});
