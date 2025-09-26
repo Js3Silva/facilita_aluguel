@@ -3,7 +3,6 @@ package com.facilita.appAluguel.dto;
 import com.facilita.appAluguel.models.Contrato;
 import com.facilita.appAluguel.models.IMappable;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -12,6 +11,5 @@ import jakarta.validation.constraints.NotNull;
  */
 public record ContratoCreateDTO(
     @NotNull(message = "ID da empresa é obrigatório")
-    @Min(value = 1, message = "ID da empresa deve ser um número positivo")
     Long empresaId
 )implements IMappable<Contrato>{}

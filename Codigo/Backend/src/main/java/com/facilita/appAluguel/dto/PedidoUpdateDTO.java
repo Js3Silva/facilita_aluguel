@@ -3,20 +3,25 @@ package com.facilita.appAluguel.dto;
 import com.facilita.appAluguel.enums.EStatusPedido;
 import com.facilita.appAluguel.models.IMappable;
 import com.facilita.appAluguel.models.Pedido;
+
+
+
+
 import java.time.LocalDate;
 import java.util.List;
 
 /**
- * DTO para representação de um Pedido em respostas.
+ * DTO para atualização de um pedido.
+ * Campos nulos indicam que não devem ser atualizados.
  */
-public record PedidoDTO(
-    Long id,
-    LocalDate dataCriacao,
-    LocalDate dataInicio,
-    LocalDate dataFim,
-    EStatusPedido status,
+public record PedidoUpdateDTO(
     Long automovelId,
-    Long contratoId,
-    Long clienteId,
+
+    LocalDate dataInicio,
+
+    LocalDate dataFim,
+
+    EStatusPedido status,
+
     List<String> avaliacoesFinanceiras
 )implements IMappable<Pedido> {}

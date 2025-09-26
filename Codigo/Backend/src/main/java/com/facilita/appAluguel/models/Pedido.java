@@ -1,10 +1,12 @@
 package com.facilita.appAluguel.models;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.facilita.appAluguel.dto.PedidoDTO;
 import com.facilita.appAluguel.enums.EStatusPedido;
 
 
@@ -45,6 +47,20 @@ public class Pedido {
         this.status = EStatusPedido.CRIADO;
     }
 
+    public PedidoDTO toDTO() {
+        return new PedidoDTO(
+        this.id,
+        this.dataCriacao,
+        this.dataInicio,
+        this.dataFim,
+        this.status,
+        this.automovel.getId(),
+        this.contrato.getId(),
+        this.cliente.getId(),
+        this.avaliacoesFinanceiras
+        );
+    }
+
     public Automovel getAutomovel() {
         return automovel;
     }
@@ -67,6 +83,19 @@ public class Pedido {
 
     public Long getId() {
         return id;
+    }
+
+    public void setDataInicio(
+            LocalDate dataInicio2) {
+                this.dataInicio = dataInicio2;
+    }
+
+    public void setAvaliacoesFinanceiras(List<String> avaliacoesFinanceiras2) {
+        this.avaliacoesFinanceiras.addAll(avaliacoesFinanceiras2);
+    }
+
+    public void setCliente(Cliente cliente2) {
+        this.cliente = cliente2;
     }
 
 }
