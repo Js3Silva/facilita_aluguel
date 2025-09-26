@@ -1,0 +1,81 @@
+body {
+    background-color: #f8f9fa;
+    margin-top: 100px;
+}
+
+h1 {
+    color: #0d3b66;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.table thead {
+    background-color: #0d3b66 !important;
+}
+
+.table thead th {
+    color: white !important;
+}
+
+.btn-primary {
+    background-color: #0d3b66;
+    border-color: #0d3b66;
+}
+
+.btn-primary:hover {
+    background-color: #12457a;
+    border-color: #12457a;
+}
+
+.btn-outline-primary {
+    color: #0d3b66;
+    border-color: #0d3b66;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d3b66;
+    color: white;
+}
+
+.field {
+    margin: 8px 0;
+}
+
+.field span {
+    font-weight: bold;
+    color: #222;
+}
+
+.btn-voltar {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #0056b3;
+}
+
+.cancelar {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #e21e1e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #9a0909;
+}

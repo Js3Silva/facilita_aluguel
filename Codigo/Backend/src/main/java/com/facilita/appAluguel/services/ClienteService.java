@@ -41,7 +41,7 @@ public class ClienteService {
         if (repository.existsByRg(cliente.getRg())) {
             throw new IllegalArgumentException("Erro: RG já cadastrado.");
         }
-        cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
+
         return repository.save(cliente);
     }
 

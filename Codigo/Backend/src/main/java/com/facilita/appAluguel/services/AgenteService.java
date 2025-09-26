@@ -3,6 +3,7 @@ package com.facilita.appAluguel.services;
 import com.facilita.appAluguel.dto.AgenteUpdateDTO;
 import com.facilita.appAluguel.dto.LoginDTO;
 import com.facilita.appAluguel.models.Agente;
+import com.facilita.appAluguel.models.Empresa;
 import com.facilita.appAluguel.repositories.AgenteRepository;
 
 import jakarta.transaction.Transactional;
@@ -39,23 +40,25 @@ public class AgenteService {
     public Agente atualizarAgente(long id, AgenteUpdateDTO dto) {
         Agente agenteExistente = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agente não encontrado com id: " + id));
+      
+        if (dto.empresa() != null) {
+            Empresa empresaDTO = dto.empresa();
+            Empresa empresaExistente = agenteExistente.getEmpresa();
 
-        if (dto.email() != null) {
-            repository.findByEmail(dto.email())
-                    .ifPresent(c -> {
-                        if (!c.getId().equals(id)) {
-                            throw new IllegalArgumentException("Email já cadastrado por outro usuário!");
-                        }
-                    });
+            if (empresaExistente == null) {
+                agenteExistente.setEmpresa(empresaDTO);
+            } else {
+                if (empresaDTO.getCnpj() != null) {
+                    empresaExistente.setCnpj(empresaDTO.getCnpj());
+                }
+                if (empresaDTO.getRazaoSocial() != null) {
+                    empresaExistente.setRazaoSocial(empresaDTO.getRazaoSocial());
+                }
+                if (!empresaDTO.isInstituicaoFinanceira()) {
+                    empresaExistente.setInstituicaoFinanceira(empresaDTO.isInstituicaoFinanceira());
+                }
+            }
         }
-
-        if (dto.nome() != null) {
-            agenteExistente.setNome(dto.nome());
-        }
-        if (dto.email() != null) {
-            agenteExistente.setEmail(dto.email());
-        }
-
         return repository.save(agenteExistente);
     }
 
