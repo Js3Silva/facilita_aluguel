@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilita Aluguel</title>
+    <link rel="stylesheet" href="../style/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:wght@700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="../assets/logo.png" alt="Logo" class="me-2" style="height:40px;">
+                Facilita Aluguel
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav me-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#top-categories">Categorias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#footer">Contato</a></li>
+                    <li class="nav-item" id="navPedidos" style="display: none;"><a class="nav-link"
+                            href="pedidos.html">Meus Pedidos</a></li>
+                    <li class="nav-item" id="logout" style="display: none;">
+                        <a href="home.html" class="nav-link" onclick="logout()">
+                            <i class="bi bi-box-arrow-left"></i> Sair
+                        </a>
+                    </li>
+
+                </ul>
+                <a id="btnLogin" href="./login.html" class="btn btn-outline-light">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero d-flex align-items-center text-white position-relative"
+        style="height:80vh; background-image: url('../assets/fundo.jpg'); background-size: cover; background-position: center;">
+
+        <!-- Carro à esquerda -->
+        <img src="../assets/t-cross.png" alt="Carro Esquerda" class="hero-car position-absolute start-0 bottom-0"
+            style="max-height:330px; transform: scaleX(-1);">
+
+        <!-- Carro à direita -->
+        <img src="../assets/flashback.png" alt="Carro Direita" class="hero-car position-absolute end-0 bottom-0"
+            style="max-height:350px;">
+    </header>
+
+
+    <!-- Categorias -->
+    <section class="py-5 text-center">
+        <div class="container">
+            <div class="d-flex justify-content-center gap-4 flex-wrap">
+                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
+                    <p>Sedan</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-car-front-fill fs-2"></i>
+                    <p>SUV</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
+                    <p>Popular</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-truck-front fs-2"></i>
+                    <p>picape</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
+                    <p>Luxo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Categories -->
+    <section class="py-5" id="top-categories">
+        <div class="container">
+            <h2 class="text-center mb-4">Top Categorias</h2>
+
+            <!-- Nav Tabs -->
+            <ul class="nav nav-tabs justify-content-center mb-4" id="categoryTabs">
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#disp">Serviço</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pref">Preferidos</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#econ">Econômicos</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#luxo">Luxo</a></li>
+            </ul>
+
+            <div id="carros-container" class="row tab-content"></div>
+        </div>
+        </div>
+        <!-- Outras abas -->
+        <div class="tab-pane fade" id="pref">
+            <p class="text-center">Carros preferidos em breve...</p>
+        </div>
+        <div class="tab-pane fade" id="econ">
+            <p class="text-center">Carros econômicos em breve...</p>
+        </div>
+        <div class="tab-pane fade" id="luxo">
+            <p class="text-center">Carros de luxo em breve...</p>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAluguel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 id="modalTitulo" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <img id="modalImg" src="" class="img-fluid mb-3" alt="Imagem do veículo">
+
+                    <h4>Marca</h4>
+                    <p id="modalModelo"></p>
+
+                    <h4>Ano</h4>
+                    <p id="modalAno"></p>
+
+                    <h4>Placa</h4>
+                    <p id="modalPlaca"></p>
+
+                    <h4>Preço Diária</h4>
+                    <p><strong>R$ </strong><span id="modalPreco"></span></p>
+                </div>
+
+                <div id="dates">
+                    <div class="dates-org">
+                        <label for="dataInicio">Data de retirada:</label>
+                        <input type="date" id="dataInicio" class="form-control">
+                    </div>
+                    <div class="dates-org">
+                        <label for="dataRetorno">Data de retorno:</label>
+                        <input type="date" id="dataRetorno" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnConfirmar" type="button" class="btn btn-primary">Confirmar Pedido</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer py-4 text-white bg-dark" id="footer">
+        <div class="container d-flex justify-content-between flex-wrap align-items-center">
+            <div class="d-flex align-items-center gap-3">
+                <img src="../assets/logo.png" alt="Logo" class="logo-footer" style="height:40px;">
+                <a href="#" class="text-white text-decoration-none">Home</a>
+                <a href="#" class="text-white text-decoration-none">Sobre</a>
+            </div>
+            <div>
+                <p class="mb-1">(31)99999-9999 <i class="bi bi-whatsapp"></i></p>
+                <p class="mb-1">info@facitaaluguel.com</p>
+                <p class="mb-0">Rua Facilita, Belo Horizonte - MG</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/home.js"></script>
+</body>
+
+</html>

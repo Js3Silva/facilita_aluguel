@@ -1,0 +1,193 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #0d1b2a !important;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.navbar #logout {
+  margin-left: 50px;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  background: #0d1b2a;
+  color: #fff;
+  padding-top: 80px;
+  text-align: center;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Categorias */
+#top-categories {
+  color: #fff;
+  padding: 80px 0;
+}
+
+#top-categories h2 {
+  font-family: "Orbitron", sans-serif !important; 
+  color: black;
+}
+
+#top-categories a {
+  color: #16293d;
+  text-decoration: none;
+}
+
+.cat-item {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.cat-item i {
+  display: block;
+  margin-bottom: 8px;
+  color: #0d1b2a;
+}
+
+.cat-item:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* Top Categories */
+.featured-car img {
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.featured-car .card-img-overlay {
+  border-radius: 10px;
+  text-align: center;
+}
+
+.card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+.footer {
+  background: #0d1b2a;
+}
+
+.footer p,
+.footer a {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* Modal */
+#modalAluguel .modal-content {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: #f9f9fb;
+  color: #222;
+}
+
+#modalAluguel .modal-header {
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  color: #fff;
+  border-radius: 16px 16px 0 0;
+}
+
+#modalAluguel .modal-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+#modalAluguel .btn-close {
+  filter: invert(1);
+}
+
+#modalAluguel .modal-body {
+  align-items: center;
+  padding: 1.5rem;
+}
+
+#modalAluguel .modal-body h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #0d6efd;
+}
+
+#modalAluguel .modal-body p {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+#modalAluguel .modal-body img {
+  display: block;
+  margin: 0 auto 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+#modalAluguel .modal-footer {
+  border-top: none;
+  padding: 1rem 1.25rem;
+}
+
+#modalAluguel .btn {
+  border-radius: 12px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+  margin-right: 30px;
+}
+
+#modalAluguel .btn:hover {
+  transform: translateY(-2px);
+}
+
+#modalAluguel #dates {
+  margin-top: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 4rem;
+}
+
+#modalAluguel #dates .dates-org {
+  text-align: center;
+}
+#modalAluguel #dates label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #0d6efd;
+}

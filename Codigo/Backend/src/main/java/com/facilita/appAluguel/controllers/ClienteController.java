@@ -1,5 +1,7 @@
 package com.facilita.appAluguel.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-@CrossOrigin(origins = "*",   // permite qualquer origem
-             allowedHeaders = "*", 
-             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/clientes")
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
     @Autowired
@@ -46,9 +45,17 @@ public class ClienteController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginCliente(@RequestBody LoginDTO loginDTO) {
-        String token = clienteService.login(loginDTO);
-        return ResponseEntity.ok(token);
+    public ResponseEntity<?> loginCliente(@RequestBody LoginDTO loginDTO) {
+        try {
+            Cliente cliente = clienteService.login(loginDTO); 
+
+            return ResponseEntity.ok(Map.of(
+                    "id", cliente.getId(),
+                    "mensagem", "Login successful"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("erro", e.getMessage()));
+        }
     }
 
     @GetMapping("/all")

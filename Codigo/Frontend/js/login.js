@@ -21,17 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkAgente = document.querySelector('#check-agente');
     const labelAgente = document.querySelector('#label-agente');
 
-    if(labelCliente && labelAgente) { 
+    if (labelCliente && labelAgente) {
         labelCliente.addEventListener('click', () => {
             checkCliente.checked = true;
-            checkAgente.checked = false; 
+            checkAgente.checked = false;
             labelCliente.classList.add('bg-red');
             labelAgente.classList.remove('bg-red');
         });
 
         labelAgente.addEventListener('click', () => {
             checkAgente.checked = true;
-            checkCliente.checked = false; 
+            checkCliente.checked = false;
             labelAgente.classList.add('bg-red');
             labelCliente.classList.remove('bg-red');
         });
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- LOGIN ---
     const btnLogin = document.querySelector("#btn-login");
-    if(btnLogin) {
+    if (btnLogin) {
         btnLogin.addEventListener("click", async () => {
             const email = document.querySelector("#login-email").value;
             const senha = document.querySelector("#login-senha").value;
@@ -51,14 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: JSON.stringify({ email, senha })
                 });
 
-                if(!resp.ok) {
-                    const msg = await resp.text();
+                if (!resp.ok) {
+                    const msg = await resp.json();
                     alert("Erro no login: " + msg);
                     return;
                 }
 
-                const token = await resp.text();
-                localStorage.setItem("token", token);
+                const cliente = await resp.json();
+                localStorage.setItem("clienteId", cliente.id);
+                localStorage.setItem("usuarioLogado", "true");
+
                 alert("Login realizado com sucesso!");
                 window.location.href = "./home.html";
             } catch (err) {
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- CADASTRO ---
     const btnRegister = document.querySelector("#btn-register");
-    if(btnRegister) {
+    if (btnRegister) {
         btnRegister.addEventListener("click", async () => {
             const cliente = {
                 nome: document.querySelector("#reg-nome").value,
@@ -102,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: JSON.stringify(cliente)
                 });
 
-                if(!resp.ok) {
+                if (!resp.ok) {
                     const msg = await resp.text();
                     alert("Erro no cadastro: " + msg);
                     return;
