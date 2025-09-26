@@ -3,6 +3,7 @@ package com.facilita.appAluguel.controllers;
 import com.facilita.appAluguel.dto.PedidoCreateDTO;
 import com.facilita.appAluguel.dto.PedidoDTO;
 import com.facilita.appAluguel.dto.PedidoUpdateDTO;
+import com.facilita.appAluguel.enums.EStatusPedido;
 import com.facilita.appAluguel.models.Automovel;
 import com.facilita.appAluguel.models.Cliente;
 import com.facilita.appAluguel.models.Pedido;
@@ -56,6 +57,7 @@ public class PedidoController {
         pedido.setAutomovel(automovel);
         pedido.setDataInicio(dto.dataInicio());
         pedido.setDataFim(dto.dataFim());
+        pedido.setStatus(EStatusPedido.CRIADO);
 
         Pedido salvo = pedidoRepository.save(pedido);
 
