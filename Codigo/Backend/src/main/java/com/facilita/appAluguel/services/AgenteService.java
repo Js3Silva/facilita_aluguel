@@ -3,6 +3,7 @@ package com.facilita.appAluguel.services;
 import com.facilita.appAluguel.dto.AgenteUpdateDTO;
 import com.facilita.appAluguel.dto.LoginDTO;
 import com.facilita.appAluguel.models.Agente;
+import com.facilita.appAluguel.models.Empresa;
 import com.facilita.appAluguel.repositories.AgenteRepository;
 
 import jakarta.transaction.Transactional;
@@ -56,6 +57,24 @@ public class AgenteService {
             agenteExistente.setEmail(dto.email());
         }
 
+        if (dto.empresa() != null) {
+            Empresa empresaDTO = dto.empresa();
+            Empresa empresaExistente = agenteExistente.getEmpresa();
+
+            if (empresaExistente == null) {
+                agenteExistente.setEmpresa(empresaDTO);
+            } else {
+                if (empresaDTO.getCnpj() != null) {
+                    empresaExistente.setCnpj(empresaDTO.getCnpj());
+                }
+                if (empresaDTO.getRazaoSocial() != null) {
+                    empresaExistente.setRazaoSocial(empresaDTO.getRazaoSocial());
+                }
+                if (!empresaDTO.isInstituicaoFinanceira()) {
+                    empresaExistente.setInstituicaoFinanceira(empresaDTO.isInstituicaoFinanceira());
+                }
+            }
+        }
         return repository.save(agenteExistente);
     }
 
