@@ -1,7 +1,12 @@
 package com.facilita.appAluguel.models;
 
 import com.facilita.appAluguel.dto.AutomovelDTO;
+import com.facilita.appAluguel.dto.PedidoCreateDTO;
+import com.facilita.appAluguel.dto.PedidoDTO;
 import com.facilita.appAluguel.enums.ESituacaoAutomovel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,22 +44,14 @@ public class Automovel {
     @Size(max = 50, message = "Modelo não pode exceder 50 caracteres")
     private String modelo;
 
-    /**
-     * Situação do automóvel (disponível, reservado, em manutenção, etc).
-     */
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Situação é obrigatória")
     private ESituacaoAutomovel situacao = ESituacaoAutomovel.DISPONIVEL;
 
-    /**
-     * Pedido que reservou este automóvel (se houver).
-     */
     @OneToOne(mappedBy = "automovel")
+    @JsonIgnore
     private Pedido pedido;
 
-    /**
-     * Campo para controle de concorrência (optimistic locking).
-     */
     @Version
     private Long version;
 
@@ -87,12 +84,10 @@ public class Automovel {
      * @return true se reservado com sucesso; false caso não estivesse disponível
      */
     public synchronized boolean reservar(Pedido pedido) {
-        if (pedido == null) {
+        if (this.situacao != ESituacaoAutomovel.DISPONIVEL) {
             return false;
         }
-        boolean ok = reservar();
-        if (!ok) return false;
-        this.pedido = pedido;
+        this.situacao = ESituacaoAutomovel.RESERVADO;
         return true;
     }
 

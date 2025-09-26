@@ -1,5 +1,4 @@
 package com.facilita.appAluguel.dto;
-
 import com.facilita.appAluguel.models.*;
 
 public record EmpresaDTO(
@@ -9,3 +8,4 @@ public record EmpresaDTO(
         boolean instituicaoFinanceira,
         Endereco endereco
 ) implements IMappable<Endereco> { }
+

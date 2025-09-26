@@ -1,0 +1,258 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+    background-image: url(../assets/fundo-login.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container{
+    background-color: white;
+    box-shadow: 0px 0px 4px rgb(167, 167, 167);
+    border-radius: 20px;
+    width: 70vh;
+    height: 40vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+}
+
+
+.login-inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 105%;
+}
+
+h1{
+    color: #0d1b2a;
+}
+
+.login-inputs .input-box{
+    width: 80%;
+    height: 13%;
+    margin: 10px;
+    border: 2px solid  #0d1b2a;
+    border-radius: 10px;
+}
+
+.login-inputs .input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login-button{
+    padding: 15px;
+    width: 80%;
+    border-radius: 0.3rem;
+    margin-top: 10px;
+    background-color: #0d1b2a;
+    color: white;
+    transition: 0.6s;
+}
+
+.login-button:hover{
+    background-color: #0d1b2a;
+}
+
+.no-register{
+    background-color: #0d1b2a;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space;
+    border-radius: 0px 20px 20px 0px;
+    color: white;
+}
+
+.no-register h2{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 22px;
+
+}
+
+.no-register p{
+    margin-top: 20px;
+    margin-bottom: 20px;   
+}
+
+.no-register button{
+   padding: 15px;
+    background-color: white;
+    width: 100%;
+    border-radius: 0.3rem;
+    margin-top: 20px;
+    color: #0d1b2a;
+    transition: 0.6s;
+}
+
+.no-register button:hover{
+    color: #0d1b2a;
+    background-color: #afafaf;
+}
+
+.register-container{
+    background-color: white;
+    box-shadow: 0px 0px 4px rgb(167, 167, 167);
+    border-radius: 20px;
+    width: 96vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.has-login{
+    background-color: #0d1b2a;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 0px 0px 20px;
+    color: white;
+}
+
+.has-login button{
+    padding: 15px;
+    background-color: white;
+    width: 100%;
+    border-radius: 0.3rem;
+    margin-top: 20px;
+    color: #0d1b2a;
+    transition: 0.6s;
+}
+
+.has-login button:hover{
+    background-color: #afafaf;
+}
+
+.has-login p{
+    margin-top: 20px;
+    margin-bottom: 20px;   
+}
+
+.has-login h2{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+
+
+
+.register-inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.register-inputs .input-box{
+    width: 80%;
+    height: 4%;
+    margin: 2px;
+    border: 2px solid  #0d1b2a;
+    border-radius: 10px;
+}
+
+.register-inputs .input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: 15px;
+    border-radius: 10px;
+}   
+
+
+.register-button{
+    padding: 15px;
+    width: 80%;
+    border-radius: 0.3rem;
+    margin-top: 10px;
+    background-color: #0d1b2a;
+    color: white;
+    transition: 0.6s;
+}
+
+.register-button:hover{
+    background-color: rgb(52, 90, 203);
+}
+
+.disp_none{
+    opacity: 0;
+    display: none;
+}
+
+.register-inputs .input-user{
+    width: 80%;
+    height: 4%;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid  rgb(14, 14, 179);
+    border-radius: 10px;
+}
+
+.register-inputs .input-user label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 9px 9px 0px;
+    height: 100%;
+    width: 100%;
+}
+
+#label-cliente{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px 0px 0px 9px;
+    height: 100%;
+    width: 100%;
+    border-right: 1px solid black;
+}
+
+#label-agente{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 9px 9px 0px;
+    height: 100%;
+    width: 100%;
+}
+
+
+.bg-red{
+    background-color: red;
+    color: white;
+}
+
+.forgot-password{
+    padding-top: 10px;
+    font-size: 15px;
+    color:black;
+}
+
+#reg-tipo-rendimento{
+    margin: 3px;
+    margin-top: 5px;
+}

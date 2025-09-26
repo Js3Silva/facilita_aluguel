@@ -21,4 +21,5 @@ public record PedidoCreateDTO(
 
     @NotNull(message = "Data de fim é obrigatória")
     LocalDate dataFim
-)implements IMappable<Pedido> {}
+)implements IMappable<Pedido> {
+}   

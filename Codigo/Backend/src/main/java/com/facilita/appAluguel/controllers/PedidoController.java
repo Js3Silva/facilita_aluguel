@@ -3,7 +3,13 @@ package com.facilita.appAluguel.controllers;
 import com.facilita.appAluguel.dto.PedidoCreateDTO;
 import com.facilita.appAluguel.dto.PedidoDTO;
 import com.facilita.appAluguel.dto.PedidoUpdateDTO;
+import com.facilita.appAluguel.enums.EStatusPedido;
+import com.facilita.appAluguel.models.Automovel;
+import com.facilita.appAluguel.models.Cliente;
 import com.facilita.appAluguel.models.Pedido;
+import com.facilita.appAluguel.repositories.AutomovelRepository;
+import com.facilita.appAluguel.repositories.ClienteRepository;
+import com.facilita.appAluguel.repositories.PedidoRepository;
 import com.facilita.appAluguel.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,37 +18,55 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-
 /**
  * Controlador REST para gerenciamento de pedidos.
  */
 @RestController
 @RequestMapping("/pedidos")
+@CrossOrigin(origins = "*")
 public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private AutomovelRepository automovelRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     /**
      * Cadastra um novo pedido.
+     * 
      * @param pedidoCreateDTO DTO com os dados do pedido.
      * @return ResponseEntity com o PedidoDTO criado ou mensagem de erro.
      */
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> cadastrarPedido(@RequestBody @Valid PedidoCreateDTO pedidoCreateDTO) {
-        try {
-            PedidoDTO novoPedido = pedidoService.cadastrarPedido(pedidoCreateDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(novoPedido);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro ao cadastrar pedido: " + e.getMessage());
-        }
+    public ResponseEntity<Pedido> criarPedido(@RequestBody @Valid PedidoCreateDTO dto) {
+        Cliente cliente = clienteRepository.findById(dto.clienteId())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        Automovel automovel = automovelRepository.findById(dto.automovelId())
+                .orElseThrow(() -> new RuntimeException("Automóvel não encontrado"));
+
+        Pedido pedido = new Pedido();
+        pedido.setCliente(cliente);
+        pedido.setAutomovel(automovel);
+        pedido.setDataInicio(dto.dataInicio());
+        pedido.setDataFim(dto.dataFim());
+        pedido.setStatus(EStatusPedido.CRIADO);
+
+        Pedido salvo = pedidoRepository.save(pedido);
+
+        return ResponseEntity.ok(salvo);
     }
 
     /**
      * Lista todos os pedidos cadastrados.
+     * 
      * @return ResponseEntity com a lista de PedidoDTOs ou mensagem de erro.
      */
     @GetMapping("/all")
@@ -57,6 +81,7 @@ public class PedidoController {
 
     /**
      * Busca um pedido pelo ID.
+     * 
      * @param id ID do pedido.
      * @return ResponseEntity com o PedidoDTO ou mensagem de erro.
      */
@@ -68,12 +93,14 @@ public class PedidoController {
 
     /**
      * Atualiza um pedido existente.
-     * @param id ID do pedido a ser atualizado.
+     * 
+     * @param id              ID do pedido a ser atualizado.
      * @param pedidoUpdateDTO DTO com os dados de atualização.
      * @return ResponseEntity com o PedidoDTO atualizado ou mensagem de erro.
      */
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarPedido(@PathVariable Long id, @RequestBody @Valid PedidoUpdateDTO pedidoUpdateDTO) {
+    public ResponseEntity<?> atualizarPedido(@PathVariable Long id,
+            @RequestBody @Valid PedidoUpdateDTO pedidoUpdateDTO) {
         try {
             PedidoDTO pedidoAtualizado = pedidoService.atualizarPedido(id, pedidoUpdateDTO);
             return ResponseEntity.ok(pedidoAtualizado);
@@ -87,6 +114,7 @@ public class PedidoController {
 
     /**
      * Deleta um pedido pelo ID.
+     * 
      * @param id ID do pedido a ser deletado.
      * @return ResponseEntity com mensagem de sucesso ou erro.
      */
@@ -103,6 +131,7 @@ public class PedidoController {
 
     /**
      * Aprova um pedido.
+     * 
      * @param id ID do pedido a ser aprovado.
      * @return ResponseEntity com o PedidoDTO aprovado ou mensagem de erro.
      */
@@ -119,6 +148,7 @@ public class PedidoController {
 
     /**
      * Cancela um pedido.
+     * 
      * @param id ID do pedido a ser cancelado.
      * @return ResponseEntity com o PedidoDTO cancelado ou mensagem de erro.
      */
