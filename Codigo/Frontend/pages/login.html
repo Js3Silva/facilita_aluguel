@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/login.css">
+    <title>Login</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="login-container">
+            <div class="login-inputs">
+                <h1>Login:</h1>
+                <div class="input-box">
+                    <input type="text" id="login-email" placeholder="E-mail" required>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="login-senha" placeholder="Senha" required>
+                </div>
+                <button class="login-button" id="btn-login">Continue</button>
+                <a class="forgot-password" href="./home.html">Esqueceu a senha?</a>
+            </div>
+            <div class="no-register">   
+                <h2>Ainda não tem uma conta?</h2>
+                <p class="register-text">Cadastre-se agora mesmo e aproveite todas as vantagens dos nossos aluguéis.</p>
+                <button class="register-button" id="to-register">Criar Conta</button>
+            </div>
+        </div>
+        <div class="register-container disp_none">
+                    <div class="has-login">
+                        <h2>Ja possui uma conta?</h2>
+                        <p class="login">Entre agora mesmo e aproveite todas as vantagens dos nossos aluguéis.</p>
+                        <button class="to-login-button" id="to-login">Login</button>
+                    </div>
+                     <div class="register-inputs">
+                        <h1>Registre-se:</h1>
+                        <div class="input-box">
+                            <input type="text" id="reg-nome" placeholder="Nome" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text"  id="reg-email" placeholder="E-mail" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" id="reg-senha" placeholder="Senha" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text"  id="reg-profissao" placeholder="Profissão" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-cpf" placeholder="CPF" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-rg" placeholder="RG" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-logradouro"  placeholder="Logadouro" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-complemento" placeholder="Complento" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-estado" placeholder="Estado" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-cidade" placeholder="Cidade" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-bairro" placeholder="Bairro" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-numero" placeholder="Numero" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-cep" placeholder="CEP" required>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="reg-rendimento" placeholder="Rendimento Mensal" required>
+                        </div>
+                        <div class="input-box .rendimento">
+                            <select id="reg-tipo-rendimento" required>
+                            <option value="" disabled selected>Selecione o Tipo de Rendimento</option>
+                            <option value="SALARIO">Salário</option>
+                            <option value="COMISSAO">Comissao</option>
+                            <option value="OUTRO">Outro</option>
+                    </select>
+                        </div>
+                        <button class="register-button" id="btn-register" >Continue</button>
+                    </div>
+                </div>
+
+
+
+    </div>
+     <script src="../scripts/login.js"></script>
+</body>
+</html>
