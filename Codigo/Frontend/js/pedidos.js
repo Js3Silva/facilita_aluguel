@@ -4,8 +4,9 @@ document.getElementById("rowsPerPage").addEventListener("change", function () {
 
 document.addEventListener("DOMContentLoaded", () => {
   const tabelaBody = document.querySelector("table tbody");
-
-  fetch("http://localhost:8080/pedidos/all")
+  var idCliente = localStorage.getItem("clienteId");
+  console.log(idCliente);
+  fetch(`http://localhost:8080/pedidos/clientes/${idCliente}`)
       .then(response => response.json())
       .then(pedidos => {
         tabelaBody.innerHTML = "";
