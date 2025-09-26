@@ -59,7 +59,7 @@ public class Pedido {
         this.dataFim,
         this.getStatus(),
         this.automovel.getId(),
-        this.contrato.getId(),
+        this.contrato != null ? this.contrato.getId() : null,
         this.cliente.getId(),
         this.avaliacoesFinanceiras
         );
