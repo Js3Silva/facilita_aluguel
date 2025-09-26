@@ -2,7 +2,6 @@ package com.facilita.appAluguel.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,5 +45,28 @@ public class Pedido {
         this.status = EStatusPedido.CRIADO;
     }
 
-    // Getters e Setters
+    public Automovel getAutomovel() {
+        return automovel;
+    }
+
+    public void setContrato(Contrato contrato2) {
+        this.contrato = contrato2;
+    }
+
+    public LocalDate getDataInicio() {
+        return this.dataInicio;
+    }
+
+    public void setStatus(EStatusPedido aprovado) {
+        this.status = aprovado;
+    }
+
+    public void setAutomovel(Automovel automovel2) {
+        this.automovel = automovel2;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
 }
