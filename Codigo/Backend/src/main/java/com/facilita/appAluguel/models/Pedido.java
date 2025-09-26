@@ -57,7 +57,7 @@ public class Pedido {
         this.dataCriacao,
         this.dataInicio,
         this.dataFim,
-        this.status,
+        this.status = EStatusPedido.CRIADO,
         this.automovel.getId(),
         this.contrato.getId(),
         this.cliente.getId(),
