@@ -27,7 +27,7 @@ public class Pedido {
     private LocalDate dataFim;
 
     @Enumerated(EnumType.STRING)
-    private EStatusPedido status;
+    private EStatusPedido status = EStatusPedido.CRIADO;
 
     @OneToOne
     @JoinColumn(name = "automovel_id")

@@ -157,6 +157,10 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
+    public Iterable<Pedido> getAllPedidosCliente(long id) {
+        return pedidoRepository.findByCliente_Id(id);
+    }
+
     /**
      * Deleta um pedido pelo ID.
      * @param id ID do pedido a ser deletado.
