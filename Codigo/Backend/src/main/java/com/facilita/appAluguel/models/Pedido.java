@@ -57,14 +57,16 @@ public class Pedido {
         this.dataCriacao,
         this.dataInicio,
         this.dataFim,
-        this.status,
+        this.getStatus(),
         this.automovel.getId(),
         this.contrato.getId(),
         this.cliente.getId(),
         this.avaliacoesFinanceiras
         );
     }
-
+    public EStatusPedido getStatus() {
+        return status;
+    }
     public Automovel getAutomovel() {
         return automovel;
     }
