@@ -24,10 +24,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav me-3">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#top-categories">Categorias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#footer">Contato</a></li>
                 </ul>
                 <a href="#" class="btn btn-outline-light">Login</a>
             </div>
@@ -35,15 +34,18 @@
     </nav>
 
     <!-- Hero -->
-    <header class="hero d-flex align-items-center text-white" style="height:60vh; background:#0d1b2a;">
-        <div class="container text-center">
-            <h1 class="mb-3">Alugue seu carro dos sonhos</h1>
-            <p class="mb-4">Lorem Ipsum has been the industry's standard dummy text ever since</p>
-            <a href="#" class="btn btn-outline-light">Saiba Mais</a>
-        </div>
-        <img src="../assets/suv.png" alt="Carro" class="hero-car position-absolute end-0 bottom-0"
-            style="max-height:250px;">
+    <header class="hero d-flex align-items-center text-white position-relative"
+        style="height:80vh; background-image: url('../assets/fundo.jpg'); background-size: cover; background-position: center;">
+
+        <!-- Carro à esquerda -->
+        <img src="../assets/suv.png" alt="Carro Esquerda" class="hero-car position-absolute start-0 bottom-0"
+            style="max-height:500px; transform: scaleX(-1);">
+
+        <!-- Carro à direita -->
+        <img src="../assets/suv.png" alt="Carro Direita" class="hero-car position-absolute end-0 bottom-0"
+            style="max-height:500px;">
     </header>
+
 
     <!-- Categorias -->
     <section class="py-5 text-center">
@@ -53,46 +55,35 @@
                     <p>Sedan</p>
                 </div>
                 <div class="cat-item"><i class="bi bi-car-front-fill fs-2"></i>
-                    <p>Cabriolet</p>
-                </div>
-                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
-                    <p>Coupe</p>
-                </div>
-                <div class="cat-item"><i class="bi bi-truck-front fs-2"></i>
                     <p>SUV</p>
                 </div>
                 <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
-                    <p>Micro</p>
+                    <p>Popular</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-truck-front fs-2"></i>
+                    <p>picape</p>
+                </div>
+                <div class="cat-item"><i class="bi bi-car-front fs-2"></i>
+                    <p>Luxo</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Top Categories -->
-    <section class="py-5">
+    <section class="py-5" id="top-categories">
         <div class="container">
-            <h2 class="text-center mb-4">Top Categories</h2>
+            <h2 class="text-center mb-4">Top Categorias</h2>
 
             <!-- Nav Tabs -->
             <ul class="nav nav-tabs justify-content-center mb-4" id="categoryTabs">
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#disp">Disponível</a></li>
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#disp">Serviço</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pref">Preferidos</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#econ">Econômicos</a></li>
                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#luxo">Luxo</a></li>
             </ul>
 
-            <div class="tab-content">
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="card">
-                        <img src="img/ferrari1.jpg" class="card-img-top">
-                        <div class="card-body text-center">
-                            <h5>Ferrari</h5>
-                            <p class="text-muted">Lorem Ipsum</p>
-                            <p class="fw-bold">$78,000</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="carros-container" class="row tab-content"></div>
         </div>
         </div>
         <!-- Outras abas -->
@@ -109,8 +100,46 @@
         </div>
     </section>
 
+    <!-- Modal -->
+    <div class="modal fade" id="modalAluguel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 id="modalTitulo" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <img id="modalImg" src="" class="img-fluid mb-3" alt="Imagem do veículo">
+
+                    <h4>Marca</h4>
+                    <p id="modalModelo"></p>
+
+                    <h4>Ano</h4>
+                    <p id="modalAno"></p>
+
+                    <h4>Placa</h4>
+                    <p id="modalPlaca"></p>
+
+                    <h4>Matrícula</h4>
+                    <p id="modalMatricula"></p>
+
+                    <h4>Preço</h4>
+                    <p><strong>R$ </strong><span id="modalPreco"></span></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnConfirmar" type="button" class="btn btn-primary">Confirmar Pedido</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <!-- Footer -->
-    <footer class="footer py-4 text-white bg-dark">
+    <footer class="footer py-4 text-white bg-dark" id="footer">
         <div class="container d-flex justify-content-between flex-wrap align-items-center">
             <div class="d-flex align-items-center gap-3">
                 <img src="../assets/logo.png" alt="Logo" class="logo-footer" style="height:40px;">

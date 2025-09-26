@@ -26,22 +26,18 @@ body {
   position: relative;
   background: #0d1b2a;
   color: #fff;
-  padding-top: 80px; /* espaçamento abaixo da navbar fixa */
+  padding-top: 80px;
+  text-align: center;
 }
 
 .hero h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
 .hero p {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 1.5rem;
-}
-
-.hero .hero-car {
-  max-height: 250px;
-  right: 10%;
 }
 
 /* Categorias */
@@ -66,13 +62,13 @@ body {
   max-height: 400px;
   object-fit: cover;
   border-radius: 10px;
+  width: 100%;
 }
 
 .featured-car .card-img-overlay {
   border-radius: 10px;
   text-align: center;
 }
-
 
 .card {
   border: none;
@@ -92,4 +88,75 @@ body {
 .footer p,
 .footer a {
   font-size: 0.9rem;
+  color: #fff;
 }
+
+/* Modal */
+#modalAluguel .modal-content {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: #f9f9fb;
+  color: #222;
+}
+
+#modalAluguel .modal-header {
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  color: #fff;
+  border-radius: 16px 16px 0 0;
+  padding: 1rem 1.25rem;
+}
+
+#modalAluguel .modal-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+#modalAluguel .btn-close {
+  filter: invert(1);
+}
+
+#modalAluguel .modal-body {
+  align-items: center;
+  padding: 1.5rem;
+}
+
+#modalAluguel .modal-body h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  color: #0d6efd;
+}
+
+#modalAluguel .modal-body p {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+#modalAluguel .modal-body img {
+  display: block;
+  margin: 0 auto 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+#modalAluguel .modal-footer {
+  border-top: none;
+  padding: 1rem 1.25rem;
+}
+
+#modalAluguel .btn {
+  border-radius: 12px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+#modalAluguel .btn:hover {
+  transform: translateY(-2px);
+}
+
