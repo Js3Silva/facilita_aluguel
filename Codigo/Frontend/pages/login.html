@@ -13,10 +13,10 @@
             <div class="login-inputs">
                 <h1>Login:</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="E-mail" required>
+                    <input type="text" id="login-email" placeholder="E-mail" required>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="E-mail" required>
+                    <input type="password" id="login-senha" placeholder="Senha" required>
                 </div>
                 <button class="login-button">Continue</button>
                 <a class="forgot-password" href="./home.html">Esqueceu a senha?</a>
@@ -36,53 +36,56 @@
                      <div class="register-inputs">
                         <h1>Registre-se:</h1>
                         <div class="input-box">
-                            <input type="text" placeholder="E-mail" required>
+                            <input type="text" id="reg-nome" placeholder="Nome" required>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Senha" required>
+                            <input type="text"  id="reg-email" placeholder="E-mail" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="CPF" required>
+                            <input type="password" id="reg-senha" placeholder="Senha" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="RG" required>
+                            <input type="text"  id="reg-profissao" placeholder="Profissão" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Logadouro" required>
+                            <input type="text" id="reg-cpf" placeholder="CPF" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Complento" required>
+                            <input type="text" id="reg-rg" placeholder="RG" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Estado" required>
+                            <input type="text" id="reg-logradouro"  placeholder="Logadouro" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Cidade" required>
+                            <input type="text" id="reg-complemento" placeholder="Complento" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Bairro" required>
+                            <input type="text" id="reg-estado" placeholder="Estado" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Numero" required>
+                            <input type="text" id="reg-cidade" placeholder="Cidade" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="CEP" required>
+                            <input type="text" id="reg-bairro" placeholder="Bairro" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Rendimento Mensal" required>
+                            <input type="text" id="reg-numero" placeholder="Numero" required>
                         </div>
                         <div class="input-box">
-                            <input type="text" placeholder="Tipo de Rendimento" required>
+                            <input type="text" id="reg-cep" placeholder="CEP" required>
                         </div>
-                        
-                         <div class="input-user">
-                            <input type="radio" class="disp_none"  id="check-cliente" value="cliente">
-                            <label for="check-cliente" id="label-cliente">Cliente</label>
-                            <input type="radio" class="disp_none" placeholder=""  id="check-agente">
-                            <label for="check-agente"  id="label-agente" value="agente">Agente</label>
+                        <div class="input-box">
+                            <input type="text" id="reg-rendimento" placeholder="Rendimento Mensal" required>
                         </div>
-
-                        <button class="register-button" >Continue</button>
+                        <div class="input-box .rendimento">
+                            <select id="reg-tipo-rendimento" required>
+                            <option value="" disabled selected>Selecione o Tipo de Rendimento</option>
+                            <option value="SALARIO">Salário</option>
+                            <option value="COMISSAO">Comissao</option>
+                            <option value="OUTRO">Outro</option>
+                    </select>
+                        </div>
+                        <button class="register-button" id="btn-register" >Continue</button>
                     </div>
                 </div>
 
