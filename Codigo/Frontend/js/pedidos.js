@@ -3,6 +3,19 @@ document.getElementById("rowsPerPage").addEventListener("change", function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    const logado = localStorage.getItem("usuarioLogado");
+
+  if (logado) {
+    document.getElementById("btnLogin").style.display = "none";
+    document.getElementById("navPedidos").style.display = "block";
+    document.getElementById("logout").style.display = "block";
+  } else {
+    document.getElementById("btnLogin").style.display = "block";
+    document.getElementById("navPedidos").style.display = "none";
+    document.getElementById("logout").style.display = "none";
+  }
+
   const tabelaBody = document.querySelector("table tbody");
   var idCliente = localStorage.getItem("clienteId");
   console.log(idCliente);
