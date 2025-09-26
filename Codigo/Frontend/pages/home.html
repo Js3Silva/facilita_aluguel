@@ -32,9 +32,16 @@
                     <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
                     <li class="nav-item"><a class="nav-link" href="#top-categories">Categorias</a></li>
                     <li class="nav-item"><a class="nav-link" href="#footer">Contato</a></li>
-                    <li id="navPedidos" style="display: none;"><a href="pedidos.html">Meus Pedidos</a></li>
+                    <li class="nav-item" id="navPedidos" style="display: none;"><a class="nav-link"
+                            href="pedidos.html">Meus Pedidos</a></li>
+                    <li class="nav-item" id="logout" style="display: none;">
+                        <a href="home.html" class="nav-link" onclick="logout()">
+                            <i class="bi bi-box-arrow-left"></i> Sair
+                        </a>
+                    </li>
+
                 </ul>
-                <a id="btnLogin" href="#login" class="btn btn-outline-light">Login</a>
+                <a id="btnLogin" href="./login.html" class="btn btn-outline-light">Login</a>
             </div>
         </div>
     </nav>
@@ -128,10 +135,7 @@
                     <h4>Placa</h4>
                     <p id="modalPlaca"></p>
 
-                    <h4>Matrícula</h4>
-                    <p id="modalMatricula"></p>
-
-                    <h4>Preço</h4>
+                    <h4>Preço Diária</h4>
                     <p><strong>R$ </strong><span id="modalPreco"></span></p>
                 </div>
 

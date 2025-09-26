@@ -4,15 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logado) {
     document.getElementById("btnLogin").style.display = "none";
     document.getElementById("navPedidos").style.display = "block";
+    document.getElementById("logout").style.display = "block";
   } else {
     document.getElementById("btnLogin").style.display = "block";
     document.getElementById("navPedidos").style.display = "none";
+    document.getElementById("logout").style.display = "none";
   }
 
   const container = document.getElementById("carros-container");
   const modal = new bootstrap.Modal(document.getElementById("modalAluguel"));
 
-  const idUsuario = localStorage.getItem("id");
+  const idUsuario = localStorage.getItem("clienteId");
+  
   let carroSelecionado = null;
 
   fetch("http://localhost:8080/automoveis/all")
@@ -45,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
               document.getElementById("modalModelo").textContent = detalhes.marca;
               document.getElementById("modalAno").textContent = detalhes.ano;
               document.getElementById("modalPlaca").textContent = detalhes.placa;
-              document.getElementById("modalMatricula").textContent = detalhes.matricula;
               document.getElementById("modalPreco").textContent = "500";
               document.getElementById("modalImg").src = "../assets/corolla.png";
 
@@ -66,11 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const dataInicio = dataInicioInput.value;
     const dataFim = dataFimInput.value;
 
-    if(idUsuario == null || idUsuario == 0) {
-      alert("Por favor, realize o login.");
-      return;
-    }
-
     if (!dataInicio || !dataFim) {
       alert("Por favor, selecione ambas as datas.");
       return;
@@ -86,51 +83,25 @@ document.addEventListener("DOMContentLoaded", () => {
         dataFim
       })
     })
-      .then(res => res.json())
-      .then(() => {
-        alert("Pedido confirmado com sucesso!");
-        modal.hide();
-      })
-      .catch(() => alert("Erro ao confirmar pedido."));
+      .then(async res => {
+    const text = await res.text(); 
+    try {
+      return JSON.parse(text);     
+    } catch (e) {
+      console.warn("Resposta não era JSON:", text);
+      return { mensagem: text };   
+    }
+  })
+  .then(data => {
+    alert("Pedido confirmado com sucesso!");
+    modal.hide();
+    console.log("Resposta do servidor:", data);
+  })
+  .catch(() => alert("Erro ao confirmar pedido."));
   });
 });
 
-    //   {
-    //     matricula: 10,
-    //     ano: 2025,
-    //     marca: "Toyota",
-    //     placa: "ABC1234",
-    //     modelo: "Corolla",
-    //     situacao: "DISPONIVEL"
-    //   },
-    //   {
-    //     matricula: 2,
-    //     ano: 2019,
-    //     marca: "Honda",
-    //     placa: "XYZ5678",
-    //     modelo: "Civic",
-    //     situacao: "DISPONIVEL"
-    //   },
-    //   {
-    //     matricula: 3,
-    //     ano: 2021,
-    //     marca: "Ford",
-    //     placa: "DEF5678",
-    //     modelo: "Mustang",
-    //     situacao: "DISPONIVEL"
-    //   },
-    //   {
-    //     matricula: 4,
-    //     ano: 2019,
-    //     marca: "Volkswagen",
-    //     placa: "XYZ5228",
-    //     modelo: "Gol",
-    //     situacao: "DISPONIVEL"
-    //   }
-    // ];
-
-
-function logoutUsuario() {
+function logout() {
   localStorage.removeItem("usuarioLogado");
   window.location.reload(); 
 }

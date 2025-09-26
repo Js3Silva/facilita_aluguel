@@ -21,6 +21,10 @@ body {
   font-size: 1.2rem;
 }
 
+.navbar #logout {
+  margin-left: 50px;
+}
+
 /* Hero */
 .hero {
   position: relative;
