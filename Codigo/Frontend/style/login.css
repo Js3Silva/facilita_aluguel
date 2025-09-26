@@ -176,7 +176,7 @@ h1{
 
 .register-inputs .input-box{
     width: 80%;
-    height: 5%;
+    height: 4%;
     margin: 5px;
     border: 2px solid  rgb(128, 0, 0);
     border-radius: 10px;
@@ -212,7 +212,7 @@ h1{
 
 .register-inputs .input-user{
     width: 80%;
-    height: 5%;
+    height: 4%;
     margin: 5px;
     display: flex;
     flex-direction: row;
