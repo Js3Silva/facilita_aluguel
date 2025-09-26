@@ -33,24 +33,18 @@
         </div>
     </nav>
 
-<!-- Hero -->
-<header class="hero d-flex align-items-center text-white position-relative" 
-        style="height:60vh; background-image: url('../assets/fundo.jpg'); background-size: cover; background-position: center;">
-  <div class="container text-center">
-    <h1 class="mb-3">Alugue seu carro dos sonhos</h1>
-    <p class="mb-4">Liberdade para ir onde quiser, quando quiser!</p>
-  </div>
+    <!-- Hero -->
+    <header class="hero d-flex align-items-center text-white position-relative"
+        style="height:80vh; background-image: url('../assets/fundo.jpg'); background-size: cover; background-position: center;">
 
-  <!-- Carro à esquerda -->
-  <img src="../assets/suv.png" alt="Carro Esquerda"
-       class="hero-car position-absolute start-0 bottom-0"
-       style="min-height:500px; transform: scaleX(-1);">
+        <!-- Carro à esquerda -->
+        <img src="../assets/suv.png" alt="Carro Esquerda" class="hero-car position-absolute start-0 bottom-0"
+            style="max-height:500px; transform: scaleX(-1);">
 
-  <!-- Carro à direita -->
-  <img src="../assets/suv.png" alt="Carro Direita"
-       class="hero-car position-absolute end-0 bottom-0"
-       style="min-height:500px;">
-</header>
+        <!-- Carro à direita -->
+        <img src="../assets/suv.png" alt="Carro Direita" class="hero-car position-absolute end-0 bottom-0"
+            style="max-height:500px;">
+    </header>
 
 
     <!-- Categorias -->
@@ -110,23 +104,39 @@
     <div class="modal fade" id="modalAluguel" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <h5 id="modalTitulo" class="modal-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+
                 <div class="modal-body">
-                    <img id="modalImg" src="" class="img-fluid mb-2">
-                    <p id="modalDesc"></p>
-                    <p><strong>Preço:</strong> <span id="modalPreco"></span></p>
+                    <img id="modalImg" src="" class="img-fluid mb-3" alt="Imagem do veículo">
+
+                    <h4>Marca</h4>
+                    <p id="modalModelo"></p>
+
+                    <h4>Ano</h4>
+                    <p id="modalAno"></p>
+
+                    <h4>Placa</h4>
+                    <p id="modalPlaca"></p>
+
+                    <h4>Matrícula</h4>
+                    <p id="modalMatricula"></p>
+
+                    <h4>Preço</h4>
+                    <p><strong>R$ </strong><span id="modalPreco"></span></p>
                 </div>
+
                 <div class="modal-footer">
-                    <button id="btnCancelar" type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">Cancelar</button>
                     <button id="btnConfirmar" type="button" class="btn btn-primary">Confirmar Pedido</button>
                 </div>
+
             </div>
         </div>
     </div>
+
 
     <!-- Footer -->
     <footer class="footer py-4 text-white bg-dark" id="footer">
