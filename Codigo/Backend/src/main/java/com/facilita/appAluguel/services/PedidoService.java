@@ -69,16 +69,17 @@ public class PedidoService {
                     return new IllegalArgumentException("Automóvel não encontrado com ID: " + pedidoCreateDTO.automovelId());
                 });
 
-        // Verificar disponibilidade do automóvel
-        if (!automovel.reservar(null)) {
-            logger.error("Automóvel indisponível com ID: {}", pedidoCreateDTO.automovelId());
-            throw new IllegalArgumentException("Automóvel indisponível para o pedido");
-        }
-
         // Criar pedido
         Pedido pedido = pedidoCreateDTO.toEntity(Pedido.class);
         pedido.setCliente(cliente);
         pedido.setAutomovel(automovel);
+
+        // Verificar disponibilidade do automóvel
+        if (!automovel.reservar(pedido)) {
+            logger.error("Automóvel indisponível com ID: {}", pedidoCreateDTO.automovelId());
+            throw new IllegalArgumentException("Automóvel indisponível para o pedido");
+        }
+
         Pedido salvo = pedidoRepository.save(pedido);
         automovelRepository.save(automovel);
 
@@ -111,10 +112,6 @@ public class PedidoService {
                         logger.error("Automóvel não encontrado com ID: {}", pedidoUpdateDTO.automovelId());
                         return new IllegalArgumentException("Automóvel não encontrado com ID: " + pedidoUpdateDTO.automovelId());
                     });
-            if (!automovel.reservar(pedido)) {
-                logger.error("Automóvel indisponível com ID: {}", pedidoUpdateDTO.automovelId());
-                throw new IllegalArgumentException("Automóvel indisponível para o pedido");
-            }
             // Liberar automóvel anterior, se houver
             if (pedido.getAutomovel() != null && !pedido.getAutomovel().getId().equals(pedidoUpdateDTO.automovelId())) {
                 pedido.getAutomovel().liberar();

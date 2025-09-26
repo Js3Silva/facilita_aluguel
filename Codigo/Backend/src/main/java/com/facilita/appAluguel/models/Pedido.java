@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.facilita.appAluguel.dto.PedidoDTO;
 import com.facilita.appAluguel.enums.EStatusPedido;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -30,13 +31,16 @@ public class Pedido {
 
     @OneToOne
     @JoinColumn(name = "automovel_id")
+    @JsonManagedReference
     private Automovel automovel;
 
     @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     private Contrato contrato;
 
+    
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonManagedReference
     private Cliente cliente;
 
     @ElementCollection
@@ -88,6 +92,14 @@ public class Pedido {
     public void setDataInicio(
             LocalDate dataInicio2) {
                 this.dataInicio = dataInicio2;
+    }
+
+    public LocalDate getDataFim() {
+        return this.dataFim;
+    }
+
+    public void setDataFim(LocalDate dataFim2) {
+        this.dataFim = dataFim2;
     }
 
     public void setAvaliacoesFinanceiras(List<String> avaliacoesFinanceiras2) {

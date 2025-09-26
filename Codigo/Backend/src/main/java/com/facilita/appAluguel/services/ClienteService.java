@@ -131,17 +131,11 @@ public class ClienteService {
 
     }
 
-    public String login(LoginDTO loginDTO) {
+    public Cliente login(LoginDTO loginDTO) {
         Optional<Cliente> cliente = repository.findByEmail(loginDTO.email());
-        // if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(),
-        // cliente.get().getSenha())) {
-        // // String token = jwtService.generateToken(cliente.get());
-        // // return token;
-        // } else {
-        // throw new RuntimeException("Credenciais inválidas");
-        // }
+
         if (cliente.isPresent() && passwordEncoder.matches(loginDTO.senha(), cliente.get().getSenha())) {
-            return "Login successful";
+            return cliente.get();
         } else {
             throw new RuntimeException("Credenciais inválidas");
         }

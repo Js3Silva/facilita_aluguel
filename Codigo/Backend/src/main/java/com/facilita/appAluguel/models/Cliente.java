@@ -51,12 +51,4 @@ public class Cliente extends Usuario {
             nome, email, senha, profissao, cpf, rg, endereco, rendimentos
         );
     }
-
-    private void addRendimento(Rendimento rendimento) {
-        this.rendimentos.add(rendimento);
-    }
-
-    private void removeRendimento(Rendimento rendimento) {
-        this.rendimentos.remove(rendimento);
-    }
 }
