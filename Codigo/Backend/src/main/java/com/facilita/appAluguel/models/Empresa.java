@@ -25,4 +25,7 @@ public class Empresa {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
+        public Long getid() {
+        return id;
+    }
 }
