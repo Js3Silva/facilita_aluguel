@@ -37,14 +37,14 @@
 }
 
 h1{
-    color: rgb(128, 0, 0);
+    color: #0d1b2a;
 }
 
 .login-inputs .input-box{
     width: 80%;
     height: 13%;
     margin: 10px;
-    border: 2px solid  rgb(128, 0, 0);
+    border: 2px solid  #0d1b2a;
     border-radius: 10px;
 }
 
@@ -61,23 +61,17 @@ h1{
     width: 80%;
     border-radius: 0.3rem;
     margin-top: 10px;
-    background-color: rgb(128, 0, 0);
+    background-color: #0d1b2a;
     color: white;
     transition: 0.6s;
 }
 
 .login-button:hover{
-    background-color: rgb(107, 0, 0);
+    background-color: #0d1b2a;
 }
 
-
-
-
-
-
-
 .no-register{
-    background-color: rgb(128, 0, 0);
+    background-color: #0d1b2a;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -105,16 +99,14 @@ h1{
     width: 100%;
     border-radius: 0.3rem;
     margin-top: 20px;
-    color: rgb(182, 12, 0);
+    color: #0d1b2a;
     transition: 0.6s;
 }
 
 .no-register button:hover{
-    color: rgb(128, 0, 0);
+    color: #0d1b2a;
     background-color: #afafaf;
 }
-
-
 
 .register-container{
     background-color: white;
@@ -125,10 +117,8 @@ h1{
     grid-template-columns: 1fr 1fr;
 }
 
-
-
 .has-login{
-    background-color: rgb(128, 0, 0);
+    background-color: #0d1b2a;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -144,7 +134,7 @@ h1{
     width: 100%;
     border-radius: 0.3rem;
     margin-top: 20px;
-    color: rgb(182, 12, 0);
+    color: #0d1b2a;
     transition: 0.6s;
 }
 
@@ -178,7 +168,7 @@ h1{
     width: 80%;
     height: 4%;
     margin: 2px;
-    border: 2px solid  rgb(128, 0, 0);
+    border: 2px solid  #0d1b2a;
     border-radius: 10px;
 }
 
@@ -196,13 +186,13 @@ h1{
     width: 80%;
     border-radius: 0.3rem;
     margin-top: 10px;
-    background-color: rgb(182, 12, 0);
+    background-color: #0d1b2a;
     color: white;
     transition: 0.6s;
 }
 
 .register-button:hover{
-    background-color: rgb(107, 0, 0);
+    background-color: rgb(52, 90, 203);
 }
 
 .disp_none{
@@ -218,7 +208,7 @@ h1{
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    border: 2px solid  rgb(128, 0, 0);
+    border: 2px solid  rgb(14, 14, 179);
     border-radius: 10px;
 }
 

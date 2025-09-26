@@ -1,7 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const logado = localStorage.getItem("usuarioLogado");
+
+  if (logado) {
+    document.getElementById("btnLogin").style.display = "none";
+    document.getElementById("navPedidos").style.display = "block";
+  } else {
+    document.getElementById("btnLogin").style.display = "block";
+    document.getElementById("navPedidos").style.display = "none";
+  }
+
   const container = document.getElementById("carros-container");
   const modal = new bootstrap.Modal(document.getElementById("modalAluguel"));
 
+  const idUsuario = localStorage.getItem("id");
   let carroSelecionado = null;
 
   fetch("http://localhost:8080/automoveis/all")
@@ -13,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.classList.add("col-md-3", "col-sm-6", "mb-3");
         card.innerHTML = `
           <div class="card">
-            <img src="../assets/suv.png" class="card-img-top">
+            <img src="../assets/corolla.png" class="card-img-top">
             <div class="card-body text-center">
               <h5>${carro.marca}</h5>
               <p class="text-muted">${carro.modelo}</p>
@@ -36,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
               document.getElementById("modalPlaca").textContent = detalhes.placa;
               document.getElementById("modalMatricula").textContent = detalhes.matricula;
               document.getElementById("modalPreco").textContent = "500";
-              document.getElementById("modalImg").src = "../assets/suv.png";
+              document.getElementById("modalImg").src = "../assets/corolla.png";
 
               modal.show();
             });
@@ -55,6 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const dataInicio = dataInicioInput.value;
     const dataFim = dataFimInput.value;
 
+    if(idUsuario == null || idUsuario == 0) {
+      alert("Por favor, realize o login.");
+      return;
+    }
+
     if (!dataInicio || !dataFim) {
       alert("Por favor, selecione ambas as datas.");
       return;
@@ -64,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        clienteId: 1,
+        clienteId: idUsuario,
         automovelId: carroSelecionado.id,
         dataInicio,
         dataFim
@@ -79,61 +95,42 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (!localStorage.getItem("automoveis_inicializados")) {
+    //   {
+    //     matricula: 10,
+    //     ano: 2025,
+    //     marca: "Toyota",
+    //     placa: "ABC1234",
+    //     modelo: "Corolla",
+    //     situacao: "DISPONIVEL"
+    //   },
+    //   {
+    //     matricula: 2,
+    //     ano: 2019,
+    //     marca: "Honda",
+    //     placa: "XYZ5678",
+    //     modelo: "Civic",
+    //     situacao: "DISPONIVEL"
+    //   },
+    //   {
+    //     matricula: 3,
+    //     ano: 2021,
+    //     marca: "Ford",
+    //     placa: "DEF5678",
+    //     modelo: "Mustang",
+    //     situacao: "DISPONIVEL"
+    //   },
+    //   {
+    //     matricula: 4,
+    //     ano: 2019,
+    //     marca: "Volkswagen",
+    //     placa: "XYZ5228",
+    //     modelo: "Gol",
+    //     situacao: "DISPONIVEL"
+    //   }
+    // ];
 
-    const automoveisMock = [
-      {
-        matricula: 10,
-        ano: 2025,
-        marca: "Toyota",
-        placa: "ABC1234",
-        modelo: "Corolla",
-        situacao: "DISPONIVEL"
-      },
-      {
-        matricula: 2,
-        ano: 2019,
-        marca: "Honda",
-        placa: "XYZ5678",
-        modelo: "Civic",
-        situacao: "DISPONIVEL"
-      },
-      {
-        matricula: 3,
-        ano: 2021,
-        marca: "Ford",
-        placa: "DEF5678",
-        modelo: "Mustang",
-        situacao: "DISPONIVEL"
-      },
-      {
-        matricula: 4,
-        ano: 2019,
-        marca: "Volkswagen",
-        placa: "XYZ5228",
-        modelo: "Gol",
-        situacao: "DISPONIVEL"
-      }
-    ];
 
-    // Faz a requisição POST para cada veículo
-    automoveisMock.forEach(auto => {
-      fetch("http://localhost:8080/automoveis/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(auto)
-      })
-        .then(res => {
-          if (!res.ok) throw new Error("Erro ao cadastrar veículo");
-          return res.json();
-        })
-        .then(data => console.log("Criado:", data))
-        .catch(err => console.error(err));
-    });
-
-    localStorage.setItem("automoveis_inicializados", "true");
-  }
-});
+function logoutUsuario() {
+  localStorage.removeItem("usuarioLogado");
+  window.location.reload(); 
+}
