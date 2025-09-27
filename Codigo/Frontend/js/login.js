@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("usuarioLogado", "true");
 
                 alert("Login realizado com sucesso!");
-                window.location.href = "./home.html";
+                window.location.href = "../index.html";
             } catch (err) {
                 alert("Erro de conexão: " + err.message);
             }
