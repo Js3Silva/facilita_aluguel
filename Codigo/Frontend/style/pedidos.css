@@ -3,6 +3,10 @@ body {
   margin-top: 100px;
 }
 
+.navbar #logout {
+  margin-left: 50px;
+}
+
 h1 {
   color: #0d3b66;
 }

@@ -6,7 +6,6 @@
     <title>Detalhes do Pedido</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/detalhes-pedido.css">
-
 </head>
 <body class="bg-secondary">
 
@@ -32,31 +31,32 @@
 </nav>
 
 <div class="container bg-light p-5 rounded-5">
-    <h1 class="d-flex justify-content-center" >Detalhes do Pedido</h1>
+    <h1 class="d-flex justify-content-center">Detalhes do Pedido</h1>
 
     <div class="row">
         <div class="section col-lg-6 col-md-12">
             <h2 class="d-flex justify-content-center">Pedido</h2>
-            <div class="field"><span>ID:</span> 12345</div>
-            <div class="field"><span>Data Criação:</span> 2025-09-24</div>
-            <div class="field"><span>Data Início:</span> 2025-09-30</div>
-            <div class="field"><span>Data Fim:</span> 2025-10-15</div>
-            <div class="field"><span>Status:</span> Em andamento</div>
+            <div class="field"><span>ID:</span> <span id="pedidoId"></span></div>
+            <div class="field"><span>Data Criação:</span> <span id="dataCriacao"></span></div>
+            <div class="field"><span>Data Início:</span> <span id="dataInicio"></span></div>
+            <div class="field"><span>Data Fim:</span> <span id="dataFim"></span></div>
+            <div class="field"><span>Status:</span> <span id="status"></span></div>
         </div>
 
         <div class="section col-lg-6 col-md-12">
             <h2 class="d-flex justify-content-center">Automóvel</h2>
-            <div class="field"><span>Matrícula:</span> 987654</div>
-            <div class="field"><span>Ano:</span> 2022</div>
-            <div class="field"><span>Marca:</span> Toyota</div>
-            <div class="field"><span>Placa:</span> ABC-1234</div>
-            <div class="field"><span>Modelo:</span> Corolla</div>
+            <div class="field"><span>Matrícula:</span> <span id="matricula"></span></div>
+            <div class="field"><span>Ano:</span> <span id="ano"></span></div>
+            <div class="field"><span>Marca:</span> <span id="marca"></span></div>
+            <div class="field"><span>Placa:</span> <span id="placa"></span></div>
+            <div class="field"><span>Modelo:</span> <span id="modelo"></span></div>
         </div>
     </div>
 
-
     <a href="javascript:history.back()" class="btn btn-primary me-2 mt-3"> Voltar</a>
-    <button class="btn btn-danger mt-3"> Cancelar pedido</button>
+    <button class="btn btn-danger mt-3" id="cancelarPedidoBtn"> Cancelar pedido</button>
 </div>
+
+<script src="../js/detalhes-pedido.js"></script>
 </body>
 </html>

@@ -78,6 +78,20 @@ public class PedidoController {
                     .body("Erro ao buscar automóveis: " + e.getMessage());
         }
     }
+    /**
+     * Lista todos os pedidos cadastrados.
+     * 
+     * @return ResponseEntity com a lista de PedidoDTOs ou mensagem de erro.
+     */
+    @GetMapping("/clientes/{id}")
+    public ResponseEntity<?> getAllPedidosClientes(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(pedidoService.getAllPedidosCliente(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao buscar automóveis: " + e.getMessage());
+        }
+    }
 
     /**
      * Busca um pedido pelo ID.
@@ -86,9 +100,9 @@ public class PedidoController {
      * @return ResponseEntity com o PedidoDTO ou mensagem de erro.
      */
     @GetMapping("/{id}")
-    public String getPedidoById(@PathVariable Long id) {
+    public ResponseEntity<PedidoDTO> getPedidoById(@PathVariable Long id) {
         Pedido pedido = pedidoService.getPedidoById(id);
-        return pedido != null ? pedido.toDTO().toString() : "Pedudi não encontrado";
+        return ResponseEntity.ok(pedido.toDTO());
     }
 
     /**

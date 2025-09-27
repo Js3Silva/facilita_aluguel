@@ -27,7 +27,7 @@ public class Pedido {
     private LocalDate dataFim;
 
     @Enumerated(EnumType.STRING)
-    private EStatusPedido status;
+    private EStatusPedido status = EStatusPedido.CRIADO;
 
     @OneToOne
     @JoinColumn(name = "automovel_id")
@@ -57,14 +57,16 @@ public class Pedido {
         this.dataCriacao,
         this.dataInicio,
         this.dataFim,
-        this.status = EStatusPedido.CRIADO,
+        this.getStatus(),
         this.automovel.getId(),
-        this.contrato.getId(),
+        this.contrato != null ? this.contrato.getId() : null,
         this.cliente.getId(),
         this.avaliacoesFinanceiras
         );
     }
-
+    public EStatusPedido getStatus() {
+        return status;
+    }
     public Automovel getAutomovel() {
         return automovel;
     }
