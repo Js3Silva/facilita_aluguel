@@ -4,7 +4,6 @@ Projeto desenvolvido como parte da disciplina **Laboratório de Desenvolvimento 
 
 O objetivo do sistema é apoiar a gestão de aluguéis de automóveis, permitindo que clientes façam pedidos de aluguel e que agentes (empresas e bancos) analisem e validem contratos.
 
----
 
 ## 📋 Funcionalidades
 
@@ -16,7 +15,6 @@ O objetivo do sistema é apoiar a gestão de aluguéis de automóveis, permitind
 * Registro de informações dos contratantes (CPF, RG, nome, profissão, rendimentos etc.).
 * Registro de automóveis (placa, marca, modelo, ano).
 
----
 
 ## 🏗 Arquitetura
 
@@ -30,7 +28,6 @@ O sistema segue a arquitetura **MVC** (Model-View-Controller), com:
   * **Frontend** no [Vercel](https://vercel.com/)
   * **Backend** via [Docker](https://www.docker.com/)
 
----
 
 ## 🚀 Execução do Projeto
 
@@ -50,7 +47,6 @@ Vercel:
 https://facilita-aluguel.vercel.app/index.html
 ```
 
----
 
 ### 🔹 2. Backend (Docker + Spring Boot)
 
@@ -82,7 +78,6 @@ O backend foi containerizado para facilitar a execução.
    http://localhost:8080
    ```
 
----
 
 ## 📂 Estrutura do Projeto
 
@@ -97,13 +92,11 @@ O backend foi containerizado para facilitar a execução.
 └── README.md
 ```
 
----
 
 ## 👥 Equipe
 
 Projeto desenvolvido por 4 integrantes da disciplina **Laboratório de Desenvolvimento de Software** (PUC Minas).
 
----
 
 ## 📑 Requisitos Atendidos
 
