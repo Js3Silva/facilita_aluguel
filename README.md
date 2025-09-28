@@ -47,6 +47,7 @@ Vercel:
 https://facilita-aluguel.vercel.app/index.html
 ```
 
+---
 
 ### 🔹 2. Backend (Docker + Spring Boot)
 
